@@ -42,3 +42,7 @@ export function setup() {
   const productId = ensureProduct(token);
   return { token, productId };
 }
+
+export default function (data) {
+  const template = releasePayloads[(__VU + __ITER) % releasePayloads.length];
+}
