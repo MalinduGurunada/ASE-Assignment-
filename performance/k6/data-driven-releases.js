@@ -10,6 +10,11 @@ const releasePayloads = new SharedArray('releasePayloads', function () {
     { version: '1.1.0', name: 'Dashboard Analytics Feature', environment: 'staging' },
     { version: '1.2.0', name: 'CSV Export Enhancement', environment: 'production' },
     { version: '2.0.0', name: 'Role-Based Access Control Upgrade', environment: 'staging' },
-    { version: '2.1.0', name: 'Audit Log Streaming', environment: 'production' }
+    { version: '2.1.0', name: 'Audit Log Streaming', environment: 'production' },
+    { version: '2.2.0', name: 'State Machine Refactor', environment: 'staging' },
+    { version: '3.0.0', name: 'Multi-Environment Deployment Support', environment: 'production' },
+    { version: '3.1.0', name: 'Changelog Diff Viewer', environment: 'staging' },
+    { version: '3.2.0', name: 'Webhook Notification Integration', environment: 'production' },
+    { version: '4.0.0', name: 'Performance Monitoring Dashboard', environment: 'staging' }
   ];
 });
