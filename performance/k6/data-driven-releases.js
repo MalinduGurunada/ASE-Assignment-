@@ -24,9 +24,9 @@ export const options = {
     data_driven_writes: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '20s', target: 10 },
-        { duration: '1m', target: 25 },
-        { duration: '20s', target: 0 }
+        { duration: __ENV.K6_DD_STAGE1_DURATION || '20s', target: Number(__ENV.K6_DD_STAGE1_TARGET || 10) },
+        { duration: __ENV.K6_DD_STAGE2_DURATION || '1m', target: Number(__ENV.K6_DD_STAGE2_TARGET || 25) },
+        { duration: __ENV.K6_DD_STAGE3_DURATION || '20s', target: Number(__ENV.K6_DD_STAGE3_TARGET || 0) }
       ]
     }
   }
