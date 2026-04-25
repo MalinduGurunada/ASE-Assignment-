@@ -70,4 +70,21 @@ export default function (data) {
       }
     }
   });
+
+  if (created) {
+    const id = createRes.json('id');
+    if (id) {
+      const readRes = http.get(`${BASE_URL}/api/releases/${id}`, authHeaders(data.token));
+      check(readRes, {
+        'GET by id returns 200': (r) => r.status === 200,
+        'GET version matches posted version': (r) => {
+          try {
+            return r.json('version').startsWith(template.version);
+          } catch {
+            return false;
+          }
+        }
+      });
+    }
+  }
 }
