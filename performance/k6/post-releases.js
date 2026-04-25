@@ -14,5 +14,9 @@ export const options = {
         { duration: __ENV.K6_POST_STAGE4_DURATION || '30s', target: Number(__ENV.K6_POST_STAGE4_TARGET || 0) }
       ]
     }
+  },
+  thresholds: {
+    http_req_failed: ['rate<0.08'],
+    http_req_duration: ['p(95)<800']
   }
 };
