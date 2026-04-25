@@ -53,4 +53,7 @@ export default function (data) {
   });
 
   const createRes = http.post(`${BASE_URL}/api/releases`, payload, authHeaders(data.token));
+  const created = check(createRes, {
+    'POST status 200 or 201': (r) => r.status === 200 || r.status === 201
+  });
 }
