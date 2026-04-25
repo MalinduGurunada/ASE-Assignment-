@@ -29,5 +29,10 @@ export const options = {
         { duration: __ENV.K6_DD_STAGE3_DURATION || '20s', target: Number(__ENV.K6_DD_STAGE3_TARGET || 0) }
       ]
     }
+  },
+  thresholds: {
+    ...SHARED_THRESHOLDS,
+    http_req_duration: ['p(95)<600'],
+    checks: ['rate>0.95']
   }
 };
