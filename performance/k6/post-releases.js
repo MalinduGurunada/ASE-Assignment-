@@ -20,3 +20,9 @@ export const options = {
     http_req_duration: ['p(95)<800']
   }
 };
+
+export function setup() {
+  const token = loginAsAdmin();
+  const productId = ensureProduct(token);
+  return { token, productId };
+}
