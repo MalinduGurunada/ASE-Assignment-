@@ -45,4 +45,10 @@ export function setup() {
 
 export default function (data) {
   const template = releasePayloads[(__VU + __ITER) % releasePayloads.length];
+  const suffix = `${__VU}-${__ITER}`;
+  const payload = JSON.stringify({
+    productId: data.productId,
+    version: `${template.version}-${suffix}`,
+    name: `[${template.environment.toUpperCase()}] ${template.name} ${suffix}`
+  });
 }
