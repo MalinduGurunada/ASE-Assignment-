@@ -10,5 +10,8 @@ export const options = {
       vus: Number(__ENV.K6_LOAD_VUS || 75),
       duration: __ENV.K6_LOAD_DURATION || '2m'
     }
+  },
+  thresholds: {
+    ...SHARED_THRESHOLDS
   }
 };
