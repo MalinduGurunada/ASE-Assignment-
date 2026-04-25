@@ -36,3 +36,9 @@ export const options = {
     checks: ['rate>0.95']
   }
 };
+
+export function setup() {
+  const token = loginAsAdmin();
+  const productId = ensureProduct(token);
+  return { token, productId };
+}
