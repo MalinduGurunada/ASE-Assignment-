@@ -51,4 +51,6 @@ export default function (data) {
     version: `${template.version}-${suffix}`,
     name: `[${template.environment.toUpperCase()}] ${template.name} ${suffix}`
   });
+
+  const createRes = http.post(`${BASE_URL}/api/releases`, payload, authHeaders(data.token));
 }
