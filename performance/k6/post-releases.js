@@ -26,3 +26,12 @@ export function setup() {
   const productId = ensureProduct(token);
   return { token, productId };
 }
+
+export default function (data) {
+  const suffix = `${__VU}-${__ITER}-${Date.now()}`;
+  const payload = {
+    productId: data.productId,
+    version: `k6-${suffix}`,
+    name: `Release-${suffix}`
+  };
+}
