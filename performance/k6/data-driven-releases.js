@@ -8,6 +8,7 @@ const releasePayloads = new SharedArray('releasePayloads', function () {
   return [
     { version: '1.0.0', name: 'Core Authentication Module', environment: 'staging' },
     { version: '1.1.0', name: 'Dashboard Analytics Feature', environment: 'staging' },
-    { version: '1.2.0', name: 'CSV Export Enhancement', environment: 'production' }
+    { version: '1.2.0', name: 'CSV Export Enhancement', environment: 'production' },
+    { version: '2.0.0', name: 'Role-Based Access Control Upgrade', environment: 'staging' }
   ];
 });
