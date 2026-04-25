@@ -4,6 +4,11 @@ import { SharedArray } from 'k6/data';
 import { BASE_URL, SHARED_THRESHOLDS, authHeaders } from './common/config.js';
 import { ensureProduct, loginAsAdmin } from './common/auth.js';
 
+/*
+A regular JS array is copied into every VU memory space at startup.
+SharedArray allocates the dataset once and maps it read-only to all VUs.
+This is critical at high VU counts to prevent out-of-memory failures.
+*/
 const releasePayloads = new SharedArray('releasePayloads', function () {
   return [
     { version: '1.0.0', name: 'Core Authentication Module', environment: 'staging' },
