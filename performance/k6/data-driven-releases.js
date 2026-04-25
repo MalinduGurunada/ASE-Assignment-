@@ -18,3 +18,16 @@ const releasePayloads = new SharedArray('releasePayloads', function () {
     { version: '4.0.0', name: 'Performance Monitoring Dashboard', environment: 'staging' }
   ];
 });
+
+export const options = {
+  scenarios: {
+    data_driven_writes: {
+      executor: 'ramping-vus',
+      stages: [
+        { duration: '20s', target: 10 },
+        { duration: '1m', target: 25 },
+        { duration: '20s', target: 0 }
+      ]
+    }
+  }
+};
