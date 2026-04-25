@@ -16,3 +16,7 @@ export const options = {
     http_req_duration: ['p(95)<500', 'avg<300']
   }
 };
+
+export function setup() {
+  return { token: loginAsAdmin() };
+}
