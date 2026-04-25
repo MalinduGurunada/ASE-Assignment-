@@ -7,8 +7,8 @@ export const options = {
   scenarios: {
     steady_release_reads: {
       executor: 'constant-vus',
-      vus: 75,
-      duration: '2m'
+      vus: Number(__ENV.K6_LOAD_VUS || 75),
+      duration: __ENV.K6_LOAD_DURATION || '2m'
     }
   }
 };
