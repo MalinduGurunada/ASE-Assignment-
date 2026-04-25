@@ -24,6 +24,7 @@ export function setup() {
 export default function (data) {
   const response = http.get(`${BASE_URL}/api/releases`, authHeaders(data.token));
   check(response, {
-    'GET /api/releases status is 200': (r) => r.status === 200
+    'GET /api/releases status is 200': (r) => r.status === 200,
+    'response is json array': (r) => Array.isArray(r.json())
   });
 }
