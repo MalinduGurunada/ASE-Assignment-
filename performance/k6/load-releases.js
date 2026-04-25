@@ -12,6 +12,7 @@ export const options = {
     }
   },
   thresholds: {
-    ...SHARED_THRESHOLDS
+    ...SHARED_THRESHOLDS,
+    http_req_duration: ['p(95)<500', 'avg<300']
   }
 };
