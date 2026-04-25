@@ -7,7 +7,12 @@ export const options = {
   scenarios: {
     write_load: {
       executor: 'ramping-vus',
-      stages: []
+      stages: [
+        { duration: '30s', target: 10 },
+        { duration: '1m', target: 30 },
+        { duration: '30s', target: 60 },
+        { duration: '30s', target: 0 }
+      ]
     }
   }
 };
