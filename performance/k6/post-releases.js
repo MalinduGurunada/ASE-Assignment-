@@ -34,4 +34,6 @@ export default function (data) {
     version: `k6-${suffix}`,
     name: `Release-${suffix}`
   };
+
+  http.post(`${BASE_URL}/api/releases`, JSON.stringify(payload), authHeaders(data.token));
 }
