@@ -1,0 +1,17 @@
+<div class="app-shell">
+  <header class="app-header">
+    <div class="brand">RMT</div>
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/products/releases" routerLinkActive="active">Releases</a>
+      <a routerLink="/deployments" routerLinkActive="active">Deployments</a>
+      <a routerLink="/deployments/rollbacks" routerLinkActive="active">Rollbacks</a>
+      <a routerLink="/auth/login" routerLinkActive="active">Auth</a>
+    </nav>
+  </header>
+
+  <main class="content-wrap">
+    <router-outlet></router-outlet>
+  </main>
+</div>
