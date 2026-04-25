@@ -54,6 +54,20 @@ export default function (data) {
 
   const createRes = http.post(`${BASE_URL}/api/releases`, payload, authHeaders(data.token));
   const created = check(createRes, {
-    'POST status 200 or 201': (r) => r.status === 200 || r.status === 201
+    'POST status 200 or 201': (r) => r.status === 200 || r.status === 201,
+    'response contains release id': (r) => {
+      try {
+        return !!r.json('id');
+      } catch {
+        return false;
+      }
+    },
+    'release name matches template': (r) => {
+      try {
+        return r.json('name').includes(template.name);
+      } catch {
+        return false;
+      }
+    }
   });
 }
