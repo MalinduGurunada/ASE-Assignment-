@@ -35,5 +35,10 @@ export default function (data) {
     name: `Release-${suffix}`
   };
 
-  http.post(`${BASE_URL}/api/releases`, JSON.stringify(payload), authHeaders(data.token));
+  const response = http.post(`${BASE_URL}/api/releases`, JSON.stringify(payload), authHeaders(data.token));
+
+  check(response, {
+    success: (r) => r.status === 200 || r.status === 201,
+    'has id': (r) => !!r.json('id')
+  });
 }
