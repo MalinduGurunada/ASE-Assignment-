@@ -15,5 +15,9 @@ export const options = {
     { duration: '20s', target: 20 },
     // Cooldown: drain all VUs and confirm graceful shutdown
     { duration: '20s', target: 0 }
-  ]
+  ],
+  thresholds: {
+    http_req_failed: ['rate<0.15'],
+    http_req_duration: ['p(99)<2500']
+  }
 };
