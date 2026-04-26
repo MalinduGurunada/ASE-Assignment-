@@ -105,4 +105,33 @@ test.describe('Negative and edge cases', () => {
 		await expect(releasePage.nameInput).not.toHaveClass(/ng-invalid/);
 		await expect(page.locator('tbody tr').filter({ hasText: validBoundaryName }).first()).toBeVisible();
 	});
+
+	test('201-character release name is rejected', async ({ page, request }) => {
+		const adminUsername = `edge-admin-${uniqueSuffix()}`;
+		const adminPassword = E2E.adminPassword;
+		const adminToken = await registerUser(request, {
+			username: adminUsername,
+			email: `${adminUsername}@rmt.e2e.local`,
+			password: adminPassword,
+			role: 'ADMIN'
+		});
+
+		const productName = `edge-product-${uniqueSuffix()}`;
+		await ensureProduct(request, adminToken, productName);
+
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(adminUsername, adminPassword);
+
+		const releasePage = new ReleaseManagementPage(page);
+		await releasePage.goto();
+		await releasePage.productSelect.selectOption({ label: productName });
+
+		const invalidBoundaryName = generateName(201);
+		await releasePage.versionInput.fill('2.0.1-edge');
+		await releasePage.nameInput.fill(invalidBoundaryName);
+		await releasePage.createReleaseButton.click();
+
+		await expect(releasePage.nameInput).toHaveClass(/ng-invalid/);
+	});
 });
