@@ -63,6 +63,19 @@ test.describe('RBAC enforcement', () => {
 		expect(/Access Denied|Forbidden/i.test(responseText)).toBeTruthy();
 	});
 
+	test('admin can successfully transition the same release', async ({ request }) => {
+		const response = await request.post(`${E2E.apiBaseUrl}/api/releases/${releaseId}/transition`, {
+			headers: {
+				Authorization: `Bearer ${adminToken}`
+			},
+			data: {
+				targetStatus: 'TESTING'
+			}
+		});
+
+		expect(response.status()).toBe(200);
+	});
+
 	test('viewer gets 403 on POST /api/releases', async ({ request }) => {
 		const response = await request.post(`${E2E.apiBaseUrl}/api/releases`, {
 			headers: {
