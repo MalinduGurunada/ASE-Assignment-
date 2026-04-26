@@ -8,6 +8,8 @@ export const options = {
     // Baseline: establish normal load before the burst
     { duration: '20s', target: 10 },
     // Spike: sudden burst to simulate viral/flash-crowd traffic
-    { duration: '20s', target: 250 }
+    { duration: '20s', target: 250 },
+    // Hold: sustain peak load to verify system stability under burst
+    { duration: '40s', target: 250 }
   ]
 };
