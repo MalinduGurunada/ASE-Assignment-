@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Deployment, DeploymentStatus, Release } from '../../../core/models';
 import { DeploymentService } from '../../../core/services/deployment.service';
 import { ReleaseService } from '../../../core/services/release.service';
@@ -8,7 +9,7 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-tracking',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './tracking.component.html',
   styleUrl: './tracking.component.scss'
 })
@@ -23,6 +24,14 @@ export class TrackingComponent implements OnInit {
   releases: Release[] = [];
   deployments: Deployment[] = [];
   error = '';
+  showForm = false;
+
+  statusBadge(status: string): string {
+    const map: Record<string, string> = {
+      PENDING: 'badge-yellow', DEPLOYED: 'badge-green', FAILED: 'badge-red', ROLLED_BACK: 'badge-purple'
+    };
+    return map[status] ?? 'badge-gray';
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,

@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Product } from '../../../core/models';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './product-management.component.html',
   styleUrl: './product-management.component.scss'
 })
@@ -20,6 +21,7 @@ export class ProductManagementComponent implements OnInit {
   products: Product[] = [];
   loading = false;
   error = '';
+  showForm = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Deployment } from '../../../core/models';
 import { DeploymentService } from '../../../core/services/deployment.service';
 
 @Component({
   selector: 'app-rollbacks',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './rollbacks.component.html',
   styleUrl: './rollbacks.component.scss'
 })

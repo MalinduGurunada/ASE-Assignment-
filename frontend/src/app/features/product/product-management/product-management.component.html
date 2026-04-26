@@ -1,22 +1,79 @@
-<section>
-  <h2>Product Management</h2>
-  <form class="product-form" [formGroup]="form" (ngSubmit)="createProduct()">
-    <label>Name <input type="text" formControlName="name" /></label>
-    <label>Description <input type="text" formControlName="description" /></label>
-    <button type="submit">Create Product</button>
-  </form>
-  <p *ngIf="loading">Loading products...</p>
-  <p *ngIf="error" class="error">{{ error }}</p>
+<div class="cf-breadcrumb">
+  <a routerLink="/dashboard">RMT</a>
+  <span>›</span>
+  <span>Products</span>
+</div>
 
+<div class="cf-page-header">
+  <div>
+    <div class="cf-page-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+      </svg>
+    </div>
+    <h1 class="cf-page-title">Products</h1>
+    <p class="cf-page-meta">Manage your product portfolio</p>
+  </div>
+  <button class="btn-primary" (click)="showForm = !showForm">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:4px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Create product
+  </button>
+</div>
+
+<!-- Create form -->
+<div class="cf-card" *ngIf="showForm">
+  <h3>New product</h3>
+  <form [formGroup]="form" (ngSubmit)="createProduct()">
+    <div class="cf-form-row">
+      <div class="cf-form-field">
+        <label>Name</label>
+        <input type="text" formControlName="name" placeholder="e.g. Payment Gateway" />
+      </div>
+      <div class="cf-form-field">
+        <label>Description</label>
+        <input type="text" formControlName="description" placeholder="Short description" />
+      </div>
+    </div>
+    <div class="cf-form-actions">
+      <button type="submit" class="btn-primary">Save</button>
+      <button type="button" class="btn-secondary" (click)="showForm = false">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<p *ngIf="error" class="inline-alert inline-alert-error">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  {{ error }}
+</p>
+
+<p *ngIf="loading" class="loading-text">Loading products…</p>
+
+<div class="cf-table-wrap">
   <table>
-    <thead><tr><th>Product</th><th>Description</th><th>Created</th><th>Action</th></tr></thead>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Action</th>
+      </tr>
+    </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.createdAt | date:'short' }}</td>
-        <td><button type="button" (click)="deleteProduct(product.id)">Delete</button></td>
+        <td class="td-name">{{ product.name }}</td>
+        <td class="td-desc">{{ product.description }}</td>
+        <td class="td-date">{{ product.createdAt | date:'MMM d, y' }}</td>
+        <td>
+          <button class="btn-danger-subtle" (click)="deleteProduct(product.id)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="products.length === 0 && !loading">
+        <td colspan="4" class="td-empty">No products yet. Create your first product above.</td>
       </tr>
     </tbody>
   </table>
-</section>
+</div>

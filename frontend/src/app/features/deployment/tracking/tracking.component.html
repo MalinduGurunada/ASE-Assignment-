@@ -1,37 +1,97 @@
-<section>
-  <h2>Deployment Tracking</h2>
-  <form class="deploy-form" [formGroup]="form" (ngSubmit)="createDeployment()">
-    <label>
-      Release
-      <select formControlName="releaseId">
-        <option [ngValue]="0">Select release</option>
-        <option *ngFor="let release of releases" [ngValue]="release.id">
-          {{ release.name }} ({{ release.version }})
-        </option>
-      </select>
-    </label>
-    <label>Environment <input type="text" formControlName="environmentName" /></label>
-    <label>
-      Status
-      <select formControlName="status">
-        <option value="PENDING">PENDING</option>
-        <option value="DEPLOYED">DEPLOYED</option>
-        <option value="FAILED">FAILED</option>
-        <option value="ROLLED_BACK">ROLLED_BACK</option>
-      </select>
-    </label>
-    <label>
-      Rollback Available
-      <input type="checkbox" formControlName="rollbackAvailable" />
-    </label>
-    <button type="submit">Create Deployment</button>
+<div class="cf-breadcrumb">
+  <a routerLink="/dashboard">RMT</a>
+  <span>›</span>
+  <span>Deployments</span>
+</div>
+
+<div class="cf-page-header">
+  <div>
+    <div class="cf-page-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <h1 class="cf-page-title">Deployment Tracking</h1>
+    <p class="cf-page-meta">Monitor all environments and deployment statuses</p>
+  </div>
+  <button class="btn-primary" (click)="showForm = !showForm">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:4px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Create deployment
+  </button>
+</div>
+
+<!-- Create form -->
+<div class="cf-card" *ngIf="showForm">
+  <h3>New deployment</h3>
+  <form [formGroup]="form" (ngSubmit)="createDeployment()">
+    <div class="cf-form-row">
+      <div class="cf-form-field">
+        <label>Release</label>
+        <select formControlName="releaseId">
+          <option [ngValue]="0">Select release</option>
+          <option *ngFor="let release of releases" [ngValue]="release.id">
+            {{ release.name }} ({{ release.version }})
+          </option>
+        </select>
+      </div>
+      <div class="cf-form-field">
+        <label>Environment</label>
+        <input type="text" formControlName="environmentName" placeholder="e.g. production, staging" />
+      </div>
+      <div class="cf-form-field">
+        <label>Status</label>
+        <select formControlName="status">
+          <option value="PENDING">Pending</option>
+          <option value="DEPLOYED">Deployed</option>
+          <option value="FAILED">Failed</option>
+          <option value="ROLLED_BACK">Rolled Back</option>
+        </select>
+      </div>
+      <div class="cf-form-field cf-form-field-check">
+        <label>Rollback Available</label>
+        <input type="checkbox" formControlName="rollbackAvailable" />
+      </div>
+    </div>
+    <div class="cf-form-actions">
+      <button type="submit" class="btn-primary">Save</button>
+      <button type="button" class="btn-secondary" (click)="showForm = false">Cancel</button>
+    </div>
   </form>
+</div>
 
-  <p *ngIf="error" class="error">{{ error }}</p>
+<p *ngIf="error" class="inline-alert inline-alert-error">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  {{ error }}
+</p>
 
-  <ul>
-    <li *ngFor="let deployment of deployments">
-      {{ deployment.environmentName }}: {{ deployment.status }} - {{ deployment.releaseName }}
-    </li>
-  </ul>
-</section>
+<div class="cf-table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Environment</th>
+        <th>Release</th>
+        <th>Status</th>
+        <th>Rollback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of deployments">
+        <td class="td-env">
+          <span class="env-dot" [class]="'env-' + d.environmentName.toLowerCase()"></span>
+          {{ d.environmentName }}
+        </td>
+        <td>{{ d.releaseName }}</td>
+        <td><span class="badge" [ngClass]="statusBadge(d.status)">{{ d.status }}</span></td>
+        <td>
+          <span class="badge badge-green" *ngIf="d.rollbackAvailable">Available</span>
+          <span class="badge badge-gray" *ngIf="!d.rollbackAvailable">N/A</span>
+        </td>
+      </tr>
+      <tr *ngIf="deployments.length === 0">
+        <td colspan="4" class="td-empty">No deployments yet. Create your first deployment above.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

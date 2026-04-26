@@ -1,1 +1,198 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #172b4d;
+  background: #f4f5f7;
+}
+
+h1 { font-size: 1.71rem; font-weight: 600; color: #172b4d; margin: 0 0 0.25rem; line-height: 1.3; }
+h2 { font-size: 1.14rem; font-weight: 600; color: #172b4d; margin: 0 0 1rem; }
+h3 { font-size: 1rem;    font-weight: 600; color: #172b4d; margin: 0 0 0.75rem; }
+p  { margin: 0 0 0.75rem; }
+
+a { color: #0052cc; text-decoration: none; }
+a:hover { text-decoration: underline; color: #0747a6; }
+
+/* ── Global table ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #dfe1e6;
+  overflow: hidden;
+}
+th {
+  background: #f4f5f7;
+  color: #6b778c;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 2px solid #dfe1e6;
+  white-space: nowrap;
+}
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid #dfe1e6;
+  color: #172b4d;
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafbfc; }
+
+/* ── Global inputs ── */
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=number],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 14px;
+  color: #172b4d;
+  background: #fff;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  padding: 6px 10px;
+  width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+  appearance: none;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 2px rgba(76,154,255,.2);
+}
+input[type=checkbox] { width: auto; }
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b778c;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 4px;
+}
+
+/* ── Global buttons ── */
+button {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding: 7px 14px;
+  transition: background .12s, box-shadow .12s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #0052cc;
+  color: #fff;
+  &:hover:not(:disabled) { background: #0747a6; }
+  &:disabled { opacity: .6; cursor: default; }
+}
+.btn-secondary {
+  background: #f4f5f7;
+  color: #172b4d;
+  border: 1px solid #dfe1e6;
+  &:hover { background: #ebecf0; }
+}
+.btn-danger {
+  background: #de350b;
+  color: #fff;
+  &:hover { background: #bf2600; }
+}
+.btn-subtle {
+  background: transparent;
+  color: #0052cc;
+  padding: 6px 10px;
+  &:hover { background: #deebff; }
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.badge-blue   { background: #deebff; color: #0747a6; }
+.badge-green  { background: #e3fcef; color: #006644; }
+.badge-yellow { background: #fff8e6; color: #974f0c; }
+.badge-red    { background: #ffebe6; color: #bf2600; }
+.badge-gray   { background: #ebecf0; color: #42526e; }
+.badge-purple { background: #eae6ff; color: #403294; }
+
+/* ── Feedback text ── */
+.error-text   { color: #de350b; font-size: 13px; margin-top: 6px; }
+.success-text { color: #006644; font-size: 13px; margin-top: 6px; }
+
+/* ── Page layout helpers ── */
+.cf-page-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dfe1e6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.cf-page-title { font-size: 1.71rem; font-weight: 700; color: #172b4d; }
+.cf-page-meta  { font-size: 13px; color: #6b778c; margin-top: 4px; }
+.cf-breadcrumb { font-size: 12px; color: #6b778c; margin-bottom: 8px; }
+.cf-breadcrumb a { color: #6b778c; }
+.cf-breadcrumb a:hover { color: #0052cc; text-decoration: none; }
+.cf-breadcrumb span { margin: 0 5px; }
+
+.cf-card {
+  background: #fff;
+  border: 1px solid #dfe1e6;
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cf-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.cf-form-field { display: flex; flex-direction: column; gap: 4px; }
+.cf-form-actions { display: flex; gap: .5rem; margin-top: .75rem; }
+
+.cf-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.cf-stat-card {
+  background: #fff;
+  border: 1px solid #dfe1e6;
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  h3 { font-size: 12px; color: #6b778c; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; margin-bottom: .25rem; }
+  .stat-value { font-size: 2rem; font-weight: 700; color: #172b4d; line-height: 1; }
+  .stat-label { font-size: 12px; color: #6b778c; margin-top: 4px; }
+}

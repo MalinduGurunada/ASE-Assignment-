@@ -1,9 +1,53 @@
-<section class="metrics-grid">
-  <article>
-    <h2>Release Throughput</h2>
-    <p>Sample data rendered with Chart.js.</p>
-    <div class="chart-wrap">
-      <canvas id="releaseFlowChart"></canvas>
+<div class="cf-breadcrumb">
+  <a routerLink="/dashboard">RMT</a>
+  <span>›</span>
+  <span>Dashboard</span>
+</div>
+
+<div class="cf-page-header">
+  <div>
+    <div class="cf-page-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+      </svg>
     </div>
-  </article>
-</section>
+    <h1 class="cf-page-title">Dashboard</h1>
+    <p class="cf-page-meta">Release pipeline overview</p>
+  </div>
+</div>
+
+<!-- Stat cards -->
+<div class="cf-stat-grid">
+  <div class="cf-stat-card">
+    <h3>Releases Completed</h3>
+    <div class="stat-value">15</div>
+    <div class="stat-label">This month</div>
+  </div>
+  <div class="cf-stat-card">
+    <h3>Active Products</h3>
+    <div class="stat-value">4</div>
+    <div class="stat-label">In pipeline</div>
+  </div>
+  <div class="cf-stat-card">
+    <h3>Deployments</h3>
+    <div class="stat-value">23</div>
+    <div class="stat-label">Total this month</div>
+  </div>
+  <div class="cf-stat-card stat-card-red">
+    <h3>Failed</h3>
+    <div class="stat-value stat-value-red">4</div>
+    <div class="stat-label">Deployment failures</div>
+  </div>
+</div>
+
+<!-- Chart -->
+<div class="cf-card">
+  <div class="chart-header">
+    <h2>Release Throughput</h2>
+    <span class="chart-period badge badge-gray">Last 4 weeks</span>
+  </div>
+  <div class="chart-wrap">
+    <canvas id="releaseFlowChart"></canvas>
+  </div>
+</div>

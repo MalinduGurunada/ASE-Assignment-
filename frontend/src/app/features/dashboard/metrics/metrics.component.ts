@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -6,7 +7,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-metrics',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './metrics.component.html',
   styleUrl: './metrics.component.scss'
 })

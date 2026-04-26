@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { ChangelogEntry, Product, Release, ReleaseStatus } from '../../../core/models';
 import { ChangelogService } from '../../../core/services/changelog.service';
 import { ProductService } from '../../../core/services/product.service';
@@ -9,7 +10,7 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-release-management',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './release-management.component.html',
   styleUrl: './release-management.component.scss'
 })
@@ -32,6 +33,15 @@ export class ReleaseManagementComponent implements OnInit {
   changelogEntries: ChangelogEntry[] = [];
   statusOptions: ReleaseStatus[] = ['DRAFT', 'TESTING', 'APPROVED', 'RELEASED'];
   error = '';
+  showForm = false;
+  selectedReleaseId: number | null = null;
+
+  statusBadge(status: ReleaseStatus): string {
+    const map: Record<ReleaseStatus, string> = {
+      DRAFT: 'badge-gray', TESTING: 'badge-yellow', APPROVED: 'badge-blue', RELEASED: 'badge-green'
+    };
+    return map[status] ?? 'badge-gray';
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -97,6 +107,7 @@ export class ReleaseManagementComponent implements OnInit {
   }
 
   selectReleaseForChangelog(releaseId: number): void {
+    this.selectedReleaseId = releaseId;
     this.changelogForm.patchValue({ releaseId });
     this.changelogService.listByRelease(releaseId).subscribe({
       next: (entries) => {

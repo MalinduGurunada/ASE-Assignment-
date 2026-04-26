@@ -1,17 +1,69 @@
-button {
-  margin-top: 0.3rem;
-  padding: 0.55rem 0.85rem;
-  background: #dc2626;
-  color: #fff;
-  border: 0;
-  border-radius: 8px;
+.cf-page-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #ffebe6;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  color: #bf2600;
 }
 
-ul {
-  display: grid;
-  gap: 0.6rem;
+.cf-table-wrap { margin-top: 1.25rem; }
+
+.td-env {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
 }
 
-.error {
-  color: #b91c1c;
+.env-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #97a0af;
 }
+.env-production  { background: #36b37e; }
+.env-staging     { background: #ff8b00; }
+.env-dev, .env-development { background: #4c9aff; }
+
+.td-empty {
+  color: #97a0af;
+  text-align: center;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-style: italic;
+}
+
+.btn-rollback {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffebe6;
+  color: #bf2600;
+  border: 1px solid #ffbdad;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .12s;
+  &:hover { background: #ff8f73; color: #fff; border-color: #ff8f73; }
+}
+
+.inline-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+.inline-alert-error { background: #ffebe6; color: #bf2600; border-left: 3px solid #de350b; }

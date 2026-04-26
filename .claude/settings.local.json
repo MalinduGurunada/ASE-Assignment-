@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git checkout *)",
+      "Bash(git commit *)",
+      "Bash(git fetch *)",
+      "Bash(git log *)",
+      "Bash(git cherry-pick *)",
+      "Bash(git branch *)",
+      "Bash(gh auth *)",
+      "Bash(./mvnw test *)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx ng *)",
+      "Bash(./mvnw spring-boot:run)",
+      "Bash(curl -s http://localhost:8080/actuator/health)",
+      "Bash(curl -s http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -d \"{}\")",
+      "Bash(RMT_JWT_SECRET=VGhpc0lzQVNlY3VyZVN0YXJ0ZXJTZWNyZXRLZXlGb3JSTVQxMjM0NTY3ODkw RMT_DB_PASSWORD= ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments=\"-Dspring.datasource.url=jdbc:h2:mem:rmt;MODE=MySQL;DB_CLOSE_DELAY=-1 -Dspring.datasource.driver-class-name=org.h2.Driver -Dspring.datasource.username=sa -Dspring.datasource.password= -Dspring.jpa.hibernate.ddl-auto=create-drop -Dspring.flyway.enabled=false\")",
+      "Bash(curl -s http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"test\",\"password\":\"test\"}')",
+      "Bash(curl -s http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -v http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(pkill -f \"spring-boot:run\")",
+      "Bash(lsof -ti:8080)",
+      "Bash(xargs kill *)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; Write-Output \"Port 8080 cleared\")",
+      "Bash(RMT_JWT_SECRET=VGhpc0lzQVNlY3VyZVN0YXJ0ZXJTZWNyZXRLZXlGb3JSTVQxMjM0NTY3ODkw RMT_DB_PASSWORD= ./mvnw spring-boot:run -Dspring-boot.run.profiles=e2e)",
+      "Bash(curl -si http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -H \"Origin: http://localhost:4200\" -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -si http://localhost:8080/api/auth/register -X POST -H \"Content-Type: application/json\" -H \"Origin: http://localhost:4200\" -d '{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@test.com\"}')",
+      "Bash(curl -si http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -H \"Origin: http://localhost:4200\" -d '{\"username\":\"testuser\",\"password\":\"password123\"}')",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8080,4200 -ErrorAction SilentlyContinue)",
+      "Bash(curl -s http://localhost:8080/api/auth/register -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"x\",\"password\":\"x\",\"email\":\"x@x.com\"}')",
+      "Bash(curl -s http://localhost:4200)"
+    ]
+  }
+}
