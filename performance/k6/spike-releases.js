@@ -10,6 +10,8 @@ export const options = {
     // Spike: sudden burst to simulate viral/flash-crowd traffic
     { duration: '20s', target: 250 },
     // Hold: sustain peak load to verify system stability under burst
-    { duration: '40s', target: 250 }
+    { duration: '40s', target: 250 },
+    // Recovery: ramp down to check system returns to normal responsiveness
+    { duration: '20s', target: 20 }
   ]
 };
