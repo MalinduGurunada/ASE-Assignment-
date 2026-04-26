@@ -41,17 +41,20 @@ test.describe('Negative and edge cases', () => {
 		await authPage.login(adminUsername, adminPassword);
 	});
 
+	// Ensures protected routes always redirect anonymous users to authentication.
 	test('unauthenticated access redirects to login', async ({ page }) => {
 		await page.goto('/releases');
 		await expect(page).toHaveURL(/\/login$/);
 	});
 
+	// Confirms unknown client-side routes recover without crashing the application shell.
 	test('invalid route resolves without application crash', async ({ page }) => {
 		await page.goto('/this-route-does-not-exist');
 		await expect(page).toHaveURL(/\/login$|\/$/);
 		await expect(page.locator('app-root')).toBeVisible();
 	});
 
+	// Verifies the release name field is marked invalid when required input is empty.
 	test('empty release name triggers ng-invalid class', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
@@ -63,6 +66,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
 
+	// Verifies users receive a clear required-field message for empty release names.
 	test('empty release name shows validation error text', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
@@ -77,6 +81,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(requiredError).toBeVisible();
 	});
 
+	// Confirms the maximum valid release name boundary (200 chars) is accepted.
 	test('200-character release name is accepted', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
@@ -91,6 +96,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('tbody tr').filter({ hasText: validBoundaryName }).first()).toBeVisible();
 	});
 
+	// Confirms input exceeding the maxlength boundary (201 chars) is rejected.
 	test('201-character release name is rejected', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
@@ -104,6 +110,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
 
+	// Ensures authentication errors are surfaced for invalid credentials.
 	test('wrong password shows login error message', async ({ page, request }) => {
 		const adminUsername = `edge-admin-${uniqueSuffix()}`;
 		const adminPassword = E2E.adminPassword;
@@ -124,6 +131,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(authPage.errorMessage).toBeVisible();
 	});
 
+	// Verifies form validation blocks login attempts when username is missing.
 	test('empty username prevents login form submission', async ({ page }) => {
 		const authPage = new AuthPage(page);
 		await authPage.gotoLogin();
@@ -136,6 +144,7 @@ test.describe('Negative and edge cases', () => {
 		expect(buttonDisabled || invalidFormCount > 0).toBeTruthy();
 	});
 
+	// Simulates token/session loss and verifies protected routes force re-authentication.
 	test('clearing auth storage mid-session redirects to login', async ({ page }) => {
 		await page.evaluate(() => localStorage.clear());
 		await page.goto('/releases');
@@ -143,6 +152,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(page).toHaveURL(/\/login$/);
 	});
 
+	// Confirms viewer users cannot see privileged creation actions in the UI.
 	test('viewer does not see Create button in UI', async ({ page, request }) => {
 		const viewerUsername = `edge-viewer-${uniqueSuffix()}`;
 		const viewerPassword = E2E.viewerPassword;
@@ -163,6 +173,7 @@ test.describe('Negative and edge cases', () => {
 		await expect(releasePage.createReleaseButton).toHaveCount(0);
 	});
 
+	// Verifies special-character payloads are handled safely without server crashes.
 	test('special characters in release name do not cause 500', async ({ request }) => {
 		const adminUsername = `edge-admin-${uniqueSuffix()}`;
 		const adminPassword = E2E.adminPassword;
