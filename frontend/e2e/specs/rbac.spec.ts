@@ -139,4 +139,16 @@ test.describe('RBAC enforcement', () => {
 
 		await expect(releasePage.createReleaseButton).toBeHidden();
 	});
+
+	test('viewer UI shows no state transition buttons', async ({ page }) => {
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(viewerCreds.username, viewerCreds.password);
+
+		const releasePage = new ReleaseManagementPage(page);
+		await releasePage.goto();
+
+		const transitionButtons = page.getByRole('button', { name: /Move to/i });
+		await expect(transitionButtons).toHaveCount(0);
+	});
 });
