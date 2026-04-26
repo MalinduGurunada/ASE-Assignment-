@@ -14,6 +14,7 @@ test.describe('RBAC enforcement', () => {
 
 	let adminToken = '';
 	let viewerToken = '';
+	let releaseId = 0;
 
 	test.beforeAll(async ({ request }) => {
 		adminToken = await registerUser(request, {
@@ -29,5 +30,13 @@ test.describe('RBAC enforcement', () => {
 			password: viewerCreds.password,
 			role: 'VIEWER'
 		});
+
+		const productId = await ensureProduct(request, adminToken, `rbac-product-${uniqueSuffix()}`);
+		const createdRelease = await createRelease(request, adminToken, {
+			productId,
+			version: '1.0.0-rbac',
+			name: `rbac-release-${uniqueSuffix()}`
+		});
+		releaseId = createdRelease.id;
 	});
 });
