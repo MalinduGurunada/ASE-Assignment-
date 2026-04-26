@@ -7,7 +7,9 @@ export const options = {
   scenarios: {
     stress_releases: {
       executor: 'ramping-vus',
-      stages: []
+      stages: [
+        { duration: __ENV.K6_STRESS_S1_DURATION || '30s', target: Number(__ENV.K6_STRESS_S1_TARGET || 25) }
+      ]
     }
   }
 };
