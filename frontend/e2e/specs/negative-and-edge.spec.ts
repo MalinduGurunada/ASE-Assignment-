@@ -7,4 +7,8 @@ function generateName(n: number): string {
 }
 
 test.describe('Negative and edge cases', () => {
+	test('unauthenticated access redirects to login', async ({ page }) => {
+		await page.goto('/releases');
+		await expect(page).toHaveURL(/\/login$/);
+	});
 });
