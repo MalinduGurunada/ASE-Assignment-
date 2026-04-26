@@ -207,4 +207,32 @@ test.describe('Negative and edge cases', () => {
 
 		await expect(releasePage.createReleaseButton).toHaveCount(0);
 	});
+
+	test('special characters in release name do not cause 500', async ({ request }) => {
+		const adminUsername = `edge-admin-${uniqueSuffix()}`;
+		const adminPassword = E2E.adminPassword;
+		await registerUser(request, {
+			username: adminUsername,
+			email: `${adminUsername}@rmt.e2e.local`,
+			password: adminPassword,
+			role: 'ADMIN'
+		});
+
+		const adminToken = await loginUser(request, adminUsername, adminPassword);
+		const productId = await ensureProduct(request, adminToken, `edge-product-${uniqueSuffix()}`);
+
+		const response = await request.post(`${E2E.apiBaseUrl}/api/releases`, {
+			headers: {
+				Authorization: `Bearer ${adminToken}`
+			},
+			data: {
+				productId,
+				version: '3.0.0-edge',
+				name: '<script>alert(1)</script>'
+			}
+		});
+
+		expect(response.status()).not.toBe(500);
+		expect([201, 400]).toContain(response.status());
+	});
 });
