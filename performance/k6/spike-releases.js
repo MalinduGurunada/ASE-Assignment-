@@ -12,6 +12,8 @@ export const options = {
     // Hold: sustain peak load to verify system stability under burst
     { duration: '40s', target: 250 },
     // Recovery: ramp down to check system returns to normal responsiveness
-    { duration: '20s', target: 20 }
+    { duration: '20s', target: 20 },
+    // Cooldown: drain all VUs and confirm graceful shutdown
+    { duration: '20s', target: 0 }
   ]
 };
