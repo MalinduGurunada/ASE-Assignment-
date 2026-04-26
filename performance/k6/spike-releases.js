@@ -21,3 +21,15 @@ export const options = {
     http_req_duration: ['p(99)<2500']
   }
 };
+
+export function setup() {
+  return { token: loginAsAdmin() };
+}
+
+export default function(data) {
+  const response = http.get(`${BASE_URL}/api/releases`, authHeaders(data.token));
+  check(response, {
+    'status 200': r => r.status === 200,
+    'response time < 2500ms': r => r.timings.duration < 2500
+  });
+}
