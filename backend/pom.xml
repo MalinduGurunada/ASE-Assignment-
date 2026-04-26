@@ -118,7 +118,7 @@
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
-					<url>jdbc:postgresql://db.euwqmorkmavbbapntxgs.supabase.co:5432/postgres</url>
+					<url>jdbc:postgresql://db.qgyrlshqwshvylbhjtbh.supabase.co:5432/postgres?sslmode=require</url>
 					<user>postgres</user>
 					<password>Diabalo@666</password>
 					<cleanDisabled>false</cleanDisabled>

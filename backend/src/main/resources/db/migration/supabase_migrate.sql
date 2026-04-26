@@ -1,0 +1,74 @@
+-- ============================================================
+-- RMT — Supabase migration script
+-- Run this once in the Supabase SQL Editor
+-- ============================================================
+
+DROP TABLE IF EXISTS audit_logs        CASCADE;
+DROP TABLE IF EXISTS deployments       CASCADE;
+DROP TABLE IF EXISTS changelog_entries CASCADE;
+DROP TABLE IF EXISTS releases          CASCADE;
+DROP TABLE IF EXISTS products          CASCADE;
+DROP TABLE IF EXISTS users             CASCADE;
+
+CREATE TABLE users (
+    id            BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username      VARCHAR(80)   NOT NULL UNIQUE,
+    email         VARCHAR(120)  NOT NULL UNIQUE,
+    password_hash VARCHAR(255)  NOT NULL,
+    role          VARCHAR(20)   NOT NULL,
+    enabled       BOOLEAN       NOT NULL DEFAULT TRUE,
+    created_at    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE products (
+    id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name        VARCHAR(120)  NOT NULL UNIQUE,
+    description VARCHAR(1000),
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE releases (
+    id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    product_id  BIGINT        NOT NULL,
+    version     VARCHAR(80)   NOT NULL,
+    name        VARCHAR(200)  NOT NULL,
+    status      VARCHAR(20)   NOT NULL,
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    released_at TIMESTAMP     NULL,
+    CONSTRAINT fk_releases_product FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE changelog_entries (
+    id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    release_id  BIGINT        NOT NULL,
+    title       VARCHAR(120)  NOT NULL,
+    entry_type  VARCHAR(60)   NOT NULL,
+    description VARCHAR(2000) NOT NULL,
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_changelog_release FOREIGN KEY (release_id) REFERENCES releases(id)
+);
+
+CREATE TABLE deployments (
+    id                 BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    release_id         BIGINT       NOT NULL,
+    environment_name   VARCHAR(40)  NOT NULL,
+    status             VARCHAR(20)  NOT NULL,
+    rollback_available BOOLEAN      NOT NULL DEFAULT FALSE,
+    deployed_at        TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_deployments_release FOREIGN KEY (release_id) REFERENCES releases(id)
+);
+
+CREATE TABLE audit_logs (
+    id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    actor       VARCHAR(100)  NOT NULL,
+    action      VARCHAR(120)  NOT NULL,
+    entity_name VARCHAR(100)  NOT NULL,
+    entity_id   VARCHAR(64),
+    details     VARCHAR(2000),
+    created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Seed admin user  (password = "admin123")
+INSERT INTO users (username, email, password_hash, role, enabled)
+VALUES ('admin', 'admin@rmt.local', '$2a$10$wrR6Cv3NHGGiROBQJRKWquc1dmFB0C5P4PFdiC79ncCMhPj8Dpl.q', 'ADMIN', TRUE)
+ON CONFLICT (username) DO UPDATE SET password_hash = EXCLUDED.password_hash;

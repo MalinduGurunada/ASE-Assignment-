@@ -31,7 +31,32 @@
       "Bash(curl -si http://localhost:8080/api/auth/login -X POST -H \"Content-Type: application/json\" -H \"Origin: http://localhost:4200\" -d '{\"username\":\"testuser\",\"password\":\"password123\"}')",
       "PowerShell(Get-NetTCPConnection -LocalPort 8080,4200 -ErrorAction SilentlyContinue)",
       "Bash(curl -s http://localhost:8080/api/auth/register -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"x\",\"password\":\"x\",\"email\":\"x@x.com\"}')",
-      "Bash(curl -s http://localhost:4200)"
+      "Bash(curl -s http://localhost:4200)",
+      "Bash(psql --version)",
+      "Bash(node -e \"const fs=require\\('fs'\\); console.log\\(JSON.stringify\\(fs.readFileSync\\('c:/Users/Dell/Desktop/student3_k6_spike_stress/backend/src/main/resources/db/migration/supabase_migrate.sql','utf8'\\)\\)\\)\")",
+      "Bash(curl -s -X POST https://qgyrlshqwshvylbhjtbh.supabase.co/rest/v1/rpc/exec_sql -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFneXJsc2hxd3NodnlsYmhqdGJoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzIxODU5NSwiZXhwIjoyMDkyNzk0NTk1fQ.CVxkE7Z8Pesm7mH_LtCp2CygrBgwW-BcGYcb3UXgbaQ' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFneXJsc2hxd3NodnlsYmhqdGJoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzIxODU5NSwiZXhwIjoyMDkyNzk0NTk1fQ.CVxkE7Z8Pesm7mH_LtCp2CygrBgwW-BcGYcb3UXgbaQ' -H 'Content-Type: application/json' -d '{\"query\": __TRACKED_VAR__}')",
+      "Bash(node -e ' *)",
+      "Bash(npm list *)",
+      "Read(//tmp/**)",
+      "PowerShell($env:RMT_DB_URL = \"jdbc:postgresql://db.qgyrlshqwshvylbhjtbh.supabase.co:5432/postgres?sslmode=require\"; $env:RMT_DB_USERNAME = \"postgres\"; $env:RMT_DB_PASSWORD = \"Diabalo@666\"; $env:RMT_JWT_SECRET = \"super-secret-jwt-key-for-rmt-app-minimum-256-bits-long-enough\"; Set-Location \"c:\\\\Users\\\\Dell\\\\Desktop\\\\student3_k6_spike_stress\\\\backend\"; Start-Process -FilePath \"cmd.exe\" -ArgumentList \"/c mvn spring-boot:run -Dspring-boot.run.profiles=supabase > backend-supabase.log 2>&1\" -WorkingDirectory \"c:\\\\Users\\\\Dell\\\\Desktop\\\\student3_k6_spike_stress\\\\backend\" -WindowStyle Hidden -PassThru | Select-Object Id)",
+      "PowerShell($env:RMT_DB_URL = \"jdbc:postgresql://db.qgyrlshqwshvylbhjtbh.supabase.co:5432/postgres?sslmode=require\"; $env:RMT_DB_USERNAME = \"postgres\"; $env:RMT_DB_PASSWORD = \"Diabalo@666\"; $env:RMT_JWT_SECRET = \"super-secret-jwt-key-for-rmt-app-minimum-256-bits-long-enough\"; Start-Process -FilePath \"cmd.exe\" -ArgumentList \"/c mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=supabase > backend-supabase.log 2>&1\" -WorkingDirectory \"c:\\\\Users\\\\Dell\\\\Desktop\\\\student3_k6_spike_stress\\\\backend\" -WindowStyle Hidden; Write-Host \"Started\")",
+      "PowerShell($env:RMT_DB_URL = \"jdbc:postgresql://db.qgyrlshqwshvylbhjtbh.supabase.co:5432/postgres?sslmode=require\"; $env:RMT_DB_USERNAME = \"postgres\"; $env:RMT_DB_PASSWORD = \"Diabalo@666\"; $env:RMT_JWT_SECRET = \"super-secret-jwt-key-for-rmt-app-minimum-256-bits-long-enough\"; Start-Process -FilePath \"cmd.exe\" -ArgumentList \"/c cd /d c:\\\\Users\\\\Dell\\\\Desktop\\\\student3_k6_spike_stress\\\\backend && mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=supabase > backend-supabase.log 2>&1\" -WindowStyle Hidden; Write-Host \"Started\")",
+      "PowerShell($p = Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -First 1; if \\($p\\) { Write-Host \"Killing PID $p\"; Stop-Process -Id $p -Force } else { Write-Host \"No process on 8080\" })",
+      "Bash(curl -s -X POST http://localhost:8080/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"admin123\"}')",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS:%{http_code}\" -X POST http://localhost:8080/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"admin123\"}')",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS:%{http_code}\" -X POST http://localhost:8080/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -sv -X POST http://localhost:8080/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -sv -X POST http://localhost:8080/api/auth/register -H 'Content-Type: application/json' -d '{\"username\":\"testuser\",\"email\":\"test@test.com\",\"password\":\"test123\",\"role\":\"VIEWER\"}')",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8080 -State Listen | Select-Object OwningProcess; Get-Process -Id \\(Get-NetTCPConnection -LocalPort 8080 -State Listen | Select-Object -ExpandProperty OwningProcess\\) -ErrorAction SilentlyContinue | Select-Object Id, Name, StartTime)",
+      "PowerShell(netstat -ano)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -sv -X POST http://localhost:8080/api/auth/register -H 'Content-Type: application/json' -d '{\"username\":\"test2\",\"email\":\"t2@t.com\",\"password\":\"test123\",\"role\":\"VIEWER\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"test2\",\"password\":\"test123\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"password\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/register -H 'Content-Type: application/json' -d '{\"username\":\"admin2\",\"email\":\"admin2@rmt.local\",\"password\":\"admin123\",\"role\":\"ADMIN\"}')",
+      "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"admin123\"}')",
+      "Bash(xargs cat *)"
     ]
   }
 }
