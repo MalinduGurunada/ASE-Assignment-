@@ -22,3 +22,7 @@ export const options = {
 export function setup() {
   return { token: loginAsAdmin() };
 }
+
+export default function(data) {
+  const response = http.get(`${BASE_URL}/api/releases`, authHeaders(data.token));
+}
