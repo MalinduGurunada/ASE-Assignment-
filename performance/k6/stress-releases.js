@@ -15,5 +15,6 @@ export const options = {
         { duration: __ENV.K6_STRESS_S5_DURATION || '30s', target: Number(__ENV.K6_STRESS_S5_TARGET || 0) }
       ]
     }
-  }
+  },
+  thresholds: { ...SHARED_THRESHOLDS }
 };
