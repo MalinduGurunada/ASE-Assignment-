@@ -8,7 +8,8 @@ export const options = {
     stress_releases: {
       executor: 'ramping-vus',
       stages: [
-        { duration: __ENV.K6_STRESS_S1_DURATION || '30s', target: Number(__ENV.K6_STRESS_S1_TARGET || 25) }
+        { duration: __ENV.K6_STRESS_S1_DURATION || '30s', target: Number(__ENV.K6_STRESS_S1_TARGET || 25) },
+        { duration: __ENV.K6_STRESS_S2_DURATION || '1m', target: Number(__ENV.K6_STRESS_S2_TARGET || 50) }
       ]
     }
   }
