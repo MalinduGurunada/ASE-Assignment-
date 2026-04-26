@@ -18,3 +18,7 @@ export const options = {
   },
   thresholds: { ...SHARED_THRESHOLDS }
 };
+
+export function setup() {
+  return { token: loginAsAdmin() };
+}
