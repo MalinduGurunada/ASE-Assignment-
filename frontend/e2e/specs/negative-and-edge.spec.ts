@@ -73,6 +73,7 @@ test.describe('Negative and edge cases', () => {
 
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 		const requiredError = page.locator('mat-error').filter({ hasText: /required/i }).first();
+		await requiredError.waitFor({ state: 'visible', timeout: 5000 });
 		await expect(requiredError).toBeVisible();
 	});
 
@@ -151,6 +152,7 @@ test.describe('Negative and edge cases', () => {
 		await authPage.passwordInput.fill(`${adminPassword}-wrong`);
 		await authPage.loginButton.click();
 
+		await authPage.errorMessage.waitFor({ state: 'visible', timeout: 5000 });
 		await expect(authPage.errorMessage).toBeVisible();
 	});
 
