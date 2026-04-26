@@ -74,4 +74,18 @@ test.describe('RBAC enforcement', () => {
 
 		expect(response.status()).toBe(403);
 	});
+
+	test('viewer gets 403 on PUT /api/releases/:id', async ({ request }) => {
+		const response = await request.put(`${E2E.apiBaseUrl}/api/releases/${releaseId}`, {
+			headers: {
+				Authorization: `Bearer ${viewerToken}`
+			},
+			data: {
+				name: 'updated-by-viewer',
+				version: '1.0.1-viewer'
+			}
+		});
+
+		expect(response.status()).toBe(403);
+	});
 });
