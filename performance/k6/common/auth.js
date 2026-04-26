@@ -8,7 +8,13 @@ export function loginAsAdmin() {
     http.post(`${BASE_URL}/api/auth/register`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
     res = http.post(`${BASE_URL}/api/auth/login`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
   }
-  const token = res.json('token');
+  let token;
+  try {
+    token = res.json('token');
+  } catch (e) {
+    console.error(`loginAsAdmin: failed to parse token — status ${res.status}, body: ${res.body}`);
+    throw e;
+  }
   if (!token) throw new Error('loginAsAdmin: token is null');
   return token;
 }
