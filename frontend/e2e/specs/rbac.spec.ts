@@ -26,12 +26,13 @@ test.describe('RBAC enforcement', () => {
 			role: 'ADMIN'
 		});
 
-		viewerToken = await registerUser(request, {
+		const viewerRegistrationBody = {
 			username: viewerCreds.username,
 			email: `${viewerCreds.username}@rmt.e2e.local`,
 			password: viewerCreds.password,
-			role: 'VIEWER'
-		});
+			role: 'VIEWER' as const
+		};
+		viewerToken = await registerUser(request, viewerRegistrationBody);
 
 		const productId = await ensureProduct(request, adminToken, `rbac-product-${uniqueSuffix()}`);
 		const createdRelease = await createRelease(request, adminToken, {
