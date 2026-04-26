@@ -88,4 +88,14 @@ test.describe('RBAC enforcement', () => {
 
 		expect(response.status()).toBe(403);
 	});
+
+	test('viewer gets 403 on DELETE /api/releases/:id', async ({ request }) => {
+		const response = await request.delete(`${E2E.apiBaseUrl}/api/releases/${releaseId}`, {
+			headers: {
+				Authorization: `Bearer ${viewerToken}`
+			}
+		});
+
+		expect(response.status()).toBe(403);
+	});
 });
