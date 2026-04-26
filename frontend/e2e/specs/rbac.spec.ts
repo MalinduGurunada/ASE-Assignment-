@@ -98,4 +98,16 @@ test.describe('RBAC enforcement', () => {
 
 		expect(response.status()).toBe(403);
 	});
+
+	test('viewer can read releases (GET is permitted)', async ({ request }) => {
+		const response = await request.get(`${E2E.apiBaseUrl}/api/releases`, {
+			headers: {
+				Authorization: `Bearer ${viewerToken}`
+			}
+		});
+
+		expect(response.status()).toBe(200);
+		const body = await response.json();
+		expect(Array.isArray(body)).toBeTruthy();
+	});
 });
