@@ -4,4 +4,7 @@ import { BASE_URL, ADMIN_USERNAME, ADMIN_PASSWORD, authHeaders } from './config.
 
 export function loginAsAdmin() {
   const res = http.post(`${BASE_URL}/api/auth/login`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
+  const token = res.json('token');
+  if (!token) throw new Error('loginAsAdmin: token is null');
+  return token;
 }
