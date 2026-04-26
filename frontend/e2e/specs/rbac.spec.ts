@@ -58,6 +58,9 @@ test.describe('RBAC enforcement', () => {
 		});
 
 		expect(response.status()).toBe(403);
+		const responseBody = await response.json().catch(() => ({}));
+		const responseText = JSON.stringify(responseBody);
+		expect(/Access Denied|Forbidden/i.test(responseText)).toBeTruthy();
 	});
 
 	test('viewer gets 403 on POST /api/releases', async ({ request }) => {
