@@ -44,7 +44,7 @@ test.describe('Negative and edge cases', () => {
 		await releasePage.nameInput.fill('');
 		await releasePage.createReleaseButton.click();
 
-		await expect(releasePage.nameInput).toHaveClass(/ng-invalid/);
+		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
 
 	test('empty release name shows validation error text', async ({ page, request }) => {
@@ -71,7 +71,7 @@ test.describe('Negative and edge cases', () => {
 		await releasePage.nameInput.fill('');
 		await releasePage.createReleaseButton.click();
 
-		await expect(releasePage.nameInput).toHaveClass(/ng-invalid/);
+		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 		const requiredError = page.locator('mat-error').filter({ hasText: /required/i }).first();
 		await expect(requiredError).toBeVisible();
 	});
@@ -102,7 +102,7 @@ test.describe('Negative and edge cases', () => {
 		await releasePage.nameInput.fill(validBoundaryName);
 		await releasePage.createReleaseButton.click();
 
-		await expect(releasePage.nameInput).not.toHaveClass(/ng-invalid/);
+		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toHaveCount(0);
 		await expect(page.locator('tbody tr').filter({ hasText: validBoundaryName }).first()).toBeVisible();
 	});
 
@@ -132,6 +132,6 @@ test.describe('Negative and edge cases', () => {
 		await releasePage.nameInput.fill(invalidBoundaryName);
 		await releasePage.createReleaseButton.click();
 
-		await expect(releasePage.nameInput).toHaveClass(/ng-invalid/);
+		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
 });
