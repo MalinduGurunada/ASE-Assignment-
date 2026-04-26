@@ -187,4 +187,24 @@ test.describe('Negative and edge cases', () => {
 
 		await expect(page).toHaveURL(/\/login$/);
 	});
+
+	test('viewer does not see Create button in UI', async ({ page, request }) => {
+		const viewerUsername = `edge-viewer-${uniqueSuffix()}`;
+		const viewerPassword = E2E.viewerPassword;
+		await registerUser(request, {
+			username: viewerUsername,
+			email: `${viewerUsername}@rmt.e2e.local`,
+			password: viewerPassword,
+			role: 'VIEWER'
+		});
+
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(viewerUsername, viewerPassword);
+
+		const releasePage = new ReleaseManagementPage(page);
+		await releasePage.goto();
+
+		await expect(releasePage.createReleaseButton).toHaveCount(0);
+	});
 });
