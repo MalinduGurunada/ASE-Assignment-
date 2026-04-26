@@ -1,0 +1,35 @@
+import http from 'k6/http';
+import { check } from 'k6';
+import { BASE_URL, SHARED_THRESHOLDS, authHeaders } from './common/config.js';
+import { loginAsAdmin } from './common/auth.js';
+
+export const options = {
+  stages: [
+    // Baseline: establish normal load before the burst
+    { duration: '20s', target: 10 },
+    // Spike: sudden burst to simulate viral/flash-crowd traffic
+    { duration: '20s', target: 250 },
+    // Hold: sustain peak load to verify system stability under burst
+    { duration: '40s', target: 250 },
+    // Recovery: ramp down to check system returns to normal responsiveness
+    { duration: '20s', target: 20 },
+    // Cooldown: drain all VUs and confirm graceful shutdown
+    { duration: '20s', target: 0 }
+  ],
+  thresholds: {
+    http_req_failed: ['rate<0.15'],
+    http_req_duration: ['p(99)<2500']
+  }
+};
+
+export function setup() {
+  return { token: loginAsAdmin() };
+}
+
+export default function(data) {
+  const response = http.get(`${BASE_URL}/api/releases`, authHeaders(data.token));
+  check(response, {
+    'status 200': r => r.status === 200,
+    'response time < 2500ms': r => r.timings.duration < 2500
+  });
+}
