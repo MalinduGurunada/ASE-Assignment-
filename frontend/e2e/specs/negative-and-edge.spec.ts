@@ -153,4 +153,16 @@ test.describe('Negative and edge cases', () => {
 
 		await expect(authPage.errorMessage).toBeVisible();
 	});
+
+	test('empty username prevents login form submission', async ({ page }) => {
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+
+		await authPage.usernameInput.fill('');
+		await authPage.passwordInput.fill(E2E.adminPassword);
+
+		const buttonDisabled = await authPage.loginButton.isDisabled();
+		const invalidFormCount = await page.locator('form.ng-invalid').count();
+		expect(buttonDisabled || invalidFormCount > 0).toBeTruthy();
+	});
 });
