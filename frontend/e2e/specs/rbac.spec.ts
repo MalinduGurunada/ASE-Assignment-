@@ -42,11 +42,13 @@ test.describe('RBAC enforcement', () => {
 		releaseId = createdRelease.id;
 	});
 
-	test('viewer credentials produce a valid token', async ({ request }) => {
-		const token = await loginUser(request, viewerCreds.username, viewerCreds.password);
+	test.beforeEach(async ({ request }) => {
+		viewerToken = await loginUser(request, viewerCreds.username, viewerCreds.password);
+	});
 
-		expect(typeof token).toBe('string');
-		expect(token.length).toBeGreaterThan(0);
+	test('viewer credentials produce a valid token', async () => {
+		expect(typeof viewerToken).toBe('string');
+		expect(viewerToken.length).toBeGreaterThan(0);
 	});
 
 	test('viewer gets 403 on state transition endpoint', async ({ request }) => {
