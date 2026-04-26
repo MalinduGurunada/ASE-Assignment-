@@ -46,4 +46,17 @@ test.describe('RBAC enforcement', () => {
 		expect(typeof token).toBe('string');
 		expect(token.length).toBeGreaterThan(0);
 	});
+
+	test('viewer gets 403 on state transition endpoint', async ({ request }) => {
+		const response = await request.post(`${E2E.apiBaseUrl}/api/releases/${releaseId}/transition`, {
+			headers: {
+				Authorization: `Bearer ${viewerToken}`
+			},
+			data: {
+				targetStatus: 'TESTING'
+			}
+		});
+
+		expect(response.status()).toBe(403);
+	});
 });
