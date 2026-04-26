@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { createRelease, ensureProduct, loginUser, registerUser } from '../utils/api-client';
 import { E2E, uniqueSuffix } from '../config/test-data';
+import { AuthPage } from '../pages/auth.page';
+import { ReleaseManagementPage } from '../pages/release-management.page';
 
 test.describe('RBAC enforcement', () => {
 	const adminCreds = {
@@ -125,5 +127,16 @@ test.describe('RBAC enforcement', () => {
 		expect(response.status()).toBe(200);
 		const body = await response.json();
 		expect(Array.isArray(body)).toBeTruthy();
+	});
+
+	test('viewer UI shows no Create Release button', async ({ page }) => {
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(viewerCreds.username, viewerCreds.password);
+
+		const releasePage = new ReleaseManagementPage(page);
+		await releasePage.goto();
+
+		await expect(releasePage.createReleaseButton).toBeHidden();
 	});
 });
