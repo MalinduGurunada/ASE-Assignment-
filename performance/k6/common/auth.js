@@ -3,7 +3,11 @@ import { check } from 'k6';
 import { BASE_URL, ADMIN_USERNAME, ADMIN_PASSWORD, authHeaders } from './config.js';
 
 export function loginAsAdmin() {
-  const res = http.post(`${BASE_URL}/api/auth/login`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
+  let res = http.post(`${BASE_URL}/api/auth/login`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
+  if (res.status === 401) {
+    http.post(`${BASE_URL}/api/auth/register`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
+    res = http.post(`${BASE_URL}/api/auth/login`, JSON.stringify({ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }), { headers: { 'Content-Type': 'application/json' } });
+  }
   const token = res.json('token');
   if (!token) throw new Error('loginAsAdmin: token is null');
   return token;
