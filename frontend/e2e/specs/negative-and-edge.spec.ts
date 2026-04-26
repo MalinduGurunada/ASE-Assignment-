@@ -165,4 +165,24 @@ test.describe('Negative and edge cases', () => {
 		const invalidFormCount = await page.locator('form.ng-invalid').count();
 		expect(buttonDisabled || invalidFormCount > 0).toBeTruthy();
 	});
+
+	test('clearing auth storage mid-session redirects to login', async ({ page, request }) => {
+		const adminUsername = `edge-admin-${uniqueSuffix()}`;
+		const adminPassword = E2E.adminPassword;
+		await registerUser(request, {
+			username: adminUsername,
+			email: `${adminUsername}@rmt.e2e.local`,
+			password: adminPassword,
+			role: 'ADMIN'
+		});
+
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(adminUsername, adminPassword);
+
+		await page.evaluate(() => localStorage.clear());
+		await page.goto('/releases');
+
+		await expect(page).toHaveURL(/\/login$/);
+	});
 });
