@@ -6,6 +6,8 @@ import { loginAsAdmin } from './common/auth.js';
 export const options = {
   stages: [
     // Baseline: establish normal load before the burst
-    { duration: '20s', target: 10 }
+    { duration: '20s', target: 10 },
+    // Spike: sudden burst to simulate viral/flash-crowd traffic
+    { duration: '20s', target: 250 }
   ]
 };
