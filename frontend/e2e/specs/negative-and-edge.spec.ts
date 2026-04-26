@@ -134,4 +134,23 @@ test.describe('Negative and edge cases', () => {
 
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
+
+	test('wrong password shows login error message', async ({ page, request }) => {
+		const adminUsername = `edge-admin-${uniqueSuffix()}`;
+		const adminPassword = E2E.adminPassword;
+		await registerUser(request, {
+			username: adminUsername,
+			email: `${adminUsername}@rmt.e2e.local`,
+			password: adminPassword,
+			role: 'ADMIN'
+		});
+
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.usernameInput.fill(adminUsername);
+		await authPage.passwordInput.fill(`${adminPassword}-wrong`);
+		await authPage.loginButton.click();
+
+		await expect(authPage.errorMessage).toBeVisible();
+	});
 });
