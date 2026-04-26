@@ -11,4 +11,10 @@ test.describe('Negative and edge cases', () => {
 		await page.goto('/releases');
 		await expect(page).toHaveURL(/\/login$/);
 	});
+
+	test('invalid route resolves without application crash', async ({ page }) => {
+		await page.goto('/this-route-does-not-exist');
+		await expect(page).toHaveURL(/\/login$|\/$/);
+		await expect(page.locator('app-root')).toBeVisible();
+	});
 });
