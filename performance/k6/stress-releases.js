@@ -11,7 +11,8 @@ export const options = {
         { duration: __ENV.K6_STRESS_S1_DURATION || '30s', target: Number(__ENV.K6_STRESS_S1_TARGET || 25) },
         { duration: __ENV.K6_STRESS_S2_DURATION || '1m', target: Number(__ENV.K6_STRESS_S2_TARGET || 50) },
         { duration: __ENV.K6_STRESS_S3_DURATION || '1m', target: Number(__ENV.K6_STRESS_S3_TARGET || 100) },
-        { duration: __ENV.K6_STRESS_S4_DURATION || '1m', target: Number(__ENV.K6_STRESS_S4_TARGET || 150) }
+        { duration: __ENV.K6_STRESS_S4_DURATION || '1m', target: Number(__ENV.K6_STRESS_S4_TARGET || 150) },
+        { duration: __ENV.K6_STRESS_S5_DURATION || '30s', target: Number(__ENV.K6_STRESS_S5_TARGET || 0) }
       ]
     }
   }
