@@ -8,7 +8,39 @@ function generateName(n: number): string {
 	return 'a'.repeat(n);
 }
 
+const adminBrowserTestTitles = new Set([
+	'empty release name triggers ng-invalid class',
+	'empty release name shows validation error text',
+	'200-character release name is accepted',
+	'201-character release name is rejected',
+	'clearing auth storage mid-session redirects to login'
+]);
+
 test.describe('Negative and edge cases', () => {
+	let adminBrowserProductName = '';
+
+	test.beforeEach(async ({ page, request }, testInfo) => {
+		if (!adminBrowserTestTitles.has(testInfo.title)) {
+			return;
+		}
+
+		const adminUsername = `edge-admin-${uniqueSuffix()}`;
+		const adminPassword = E2E.adminPassword;
+		const adminToken = await registerUser(request, {
+			username: adminUsername,
+			email: `${adminUsername}@rmt.e2e.local`,
+			password: adminPassword,
+			role: 'ADMIN'
+		});
+
+		adminBrowserProductName = `edge-product-${uniqueSuffix()}`;
+		await ensureProduct(request, adminToken, adminBrowserProductName);
+
+		const authPage = new AuthPage(page);
+		await authPage.gotoLogin();
+		await authPage.login(adminUsername, adminPassword);
+	});
+
 	test('unauthenticated access redirects to login', async ({ page }) => {
 		await page.goto('/releases');
 		await expect(page).toHaveURL(/\/login$/);
@@ -20,26 +52,10 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('app-root')).toBeVisible();
 	});
 
-	test('empty release name triggers ng-invalid class', async ({ page, request }) => {
-		const adminUsername = `edge-admin-${uniqueSuffix()}`;
-		const adminPassword = E2E.adminPassword;
-		const adminToken = await registerUser(request, {
-			username: adminUsername,
-			email: `${adminUsername}@rmt.e2e.local`,
-			password: adminPassword,
-			role: 'ADMIN'
-		});
-
-		const productName = `edge-product-${uniqueSuffix()}`;
-		await ensureProduct(request, adminToken, productName);
-
-		const authPage = new AuthPage(page);
-		await authPage.gotoLogin();
-		await authPage.login(adminUsername, adminPassword);
-
+	test('empty release name triggers ng-invalid class', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
-		await releasePage.productSelect.selectOption({ label: productName });
+		await releasePage.productSelect.selectOption({ label: adminBrowserProductName });
 		await releasePage.versionInput.fill('1.0.0-edge');
 		await releasePage.nameInput.fill('');
 		await releasePage.createReleaseButton.click();
@@ -47,26 +63,10 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
 	});
 
-	test('empty release name shows validation error text', async ({ page, request }) => {
-		const adminUsername = `edge-admin-${uniqueSuffix()}`;
-		const adminPassword = E2E.adminPassword;
-		const adminToken = await registerUser(request, {
-			username: adminUsername,
-			email: `${adminUsername}@rmt.e2e.local`,
-			password: adminPassword,
-			role: 'ADMIN'
-		});
-
-		const productName = `edge-product-${uniqueSuffix()}`;
-		await ensureProduct(request, adminToken, productName);
-
-		const authPage = new AuthPage(page);
-		await authPage.gotoLogin();
-		await authPage.login(adminUsername, adminPassword);
-
+	test('empty release name shows validation error text', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
-		await releasePage.productSelect.selectOption({ label: productName });
+		await releasePage.productSelect.selectOption({ label: adminBrowserProductName });
 		await releasePage.versionInput.fill('1.0.0-edge');
 		await releasePage.nameInput.fill('');
 		await releasePage.createReleaseButton.click();
@@ -77,26 +77,10 @@ test.describe('Negative and edge cases', () => {
 		await expect(requiredError).toBeVisible();
 	});
 
-	test('200-character release name is accepted', async ({ page, request }) => {
-		const adminUsername = `edge-admin-${uniqueSuffix()}`;
-		const adminPassword = E2E.adminPassword;
-		const adminToken = await registerUser(request, {
-			username: adminUsername,
-			email: `${adminUsername}@rmt.e2e.local`,
-			password: adminPassword,
-			role: 'ADMIN'
-		});
-
-		const productName = `edge-product-${uniqueSuffix()}`;
-		await ensureProduct(request, adminToken, productName);
-
-		const authPage = new AuthPage(page);
-		await authPage.gotoLogin();
-		await authPage.login(adminUsername, adminPassword);
-
+	test('200-character release name is accepted', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
-		await releasePage.productSelect.selectOption({ label: productName });
+		await releasePage.productSelect.selectOption({ label: adminBrowserProductName });
 
 		const validBoundaryName = generateName(200);
 		await releasePage.versionInput.fill('2.0.0-edge');
@@ -107,26 +91,10 @@ test.describe('Negative and edge cases', () => {
 		await expect(page.locator('tbody tr').filter({ hasText: validBoundaryName }).first()).toBeVisible();
 	});
 
-	test('201-character release name is rejected', async ({ page, request }) => {
-		const adminUsername = `edge-admin-${uniqueSuffix()}`;
-		const adminPassword = E2E.adminPassword;
-		const adminToken = await registerUser(request, {
-			username: adminUsername,
-			email: `${adminUsername}@rmt.e2e.local`,
-			password: adminPassword,
-			role: 'ADMIN'
-		});
-
-		const productName = `edge-product-${uniqueSuffix()}`;
-		await ensureProduct(request, adminToken, productName);
-
-		const authPage = new AuthPage(page);
-		await authPage.gotoLogin();
-		await authPage.login(adminUsername, adminPassword);
-
+	test('201-character release name is rejected', async ({ page }) => {
 		const releasePage = new ReleaseManagementPage(page);
 		await releasePage.goto();
-		await releasePage.productSelect.selectOption({ label: productName });
+		await releasePage.productSelect.selectOption({ label: adminBrowserProductName });
 
 		const invalidBoundaryName = generateName(201);
 		await releasePage.versionInput.fill('2.0.1-edge');
@@ -168,20 +136,7 @@ test.describe('Negative and edge cases', () => {
 		expect(buttonDisabled || invalidFormCount > 0).toBeTruthy();
 	});
 
-	test('clearing auth storage mid-session redirects to login', async ({ page, request }) => {
-		const adminUsername = `edge-admin-${uniqueSuffix()}`;
-		const adminPassword = E2E.adminPassword;
-		await registerUser(request, {
-			username: adminUsername,
-			email: `${adminUsername}@rmt.e2e.local`,
-			password: adminPassword,
-			role: 'ADMIN'
-		});
-
-		const authPage = new AuthPage(page);
-		await authPage.gotoLogin();
-		await authPage.login(adminUsername, adminPassword);
-
+	test('clearing auth storage mid-session redirects to login', async ({ page }) => {
 		await page.evaluate(() => localStorage.clear());
 		await page.goto('/releases');
 
