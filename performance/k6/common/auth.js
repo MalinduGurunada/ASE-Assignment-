@@ -12,3 +12,8 @@ export function loginAsAdmin() {
   if (!token) throw new Error('loginAsAdmin: token is null');
   return token;
 }
+
+export function ensureProduct(token, payload) {
+  const res = http.post(`${BASE_URL}/api/products`, JSON.stringify(payload), authHeaders(token));
+  return res.json('id');
+}
