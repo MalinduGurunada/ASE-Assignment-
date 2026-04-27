@@ -48,4 +48,10 @@ export async function getReleaseByName(request: APIRequestContext, token: string
   return releases.find(r => r.name === name);
 }
 
+export async function transitionRelease(request: APIRequestContext, token: string, releaseId: number, targetStatus: string) {
+  const res = await apiFetch(request, /api/releases//transition, { method: 'POST', headers: { Authorization: Bearer  }, data: { status: targetStatus } });
+  if (!res.ok()) throw new Error(	ransition failed: );
+  return res.json();
+}
+
 export {};
