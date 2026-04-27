@@ -15,4 +15,14 @@ export async function registerUser(request: APIRequestContext, username: string,
   return res;
 }
 
+export async function loginUser(request: APIRequestContext, username: string, password: string): Promise<string> {
+  const res = await apiFetch(request, `/api/auth/login`, {
+    method: 'POST',
+    data: { username, password }
+  });
+  if (!res.ok()) throw new Error(`login failed: ${res.status()}`);
+  const body = await res.json();
+  return body.accessToken ?? body.token ?? '';
+}
+
 export {};
