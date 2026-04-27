@@ -28,4 +28,9 @@ export class ReleaseManagementPage {
     }
     throw new Error(Timeout waiting for state  for );
   }
+
+  async transitionRelease(releaseName: string, newState: string) {
+    await this.page.locator(	r:has-text("")).locator('button:has-text("Transition")').click();
+    await this.waitForState(releaseName, newState);
+  }
 }
