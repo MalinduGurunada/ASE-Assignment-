@@ -12,4 +12,8 @@ export class AuthPage {
     this.passwordInput = page.locator('input[name="password"]');
     this.loginButton = page.locator('button[type="submit"]');
   }
+
+  async navigate() {
+    await this.page.goto('/login');
+  }
 }
