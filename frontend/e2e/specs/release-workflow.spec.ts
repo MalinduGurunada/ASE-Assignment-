@@ -18,4 +18,15 @@ test.describe('Admin release lifecycle', () => {
     await releasePage.navigateToReleaseManagement();
     await expect(page.locator('h1:has-text("Releases")')).toBeVisible();
   });
+
+  test('admin creates release in DRAFT state', async ({ page }) => {
+    const authPage = new AuthPage(page);
+    await authPage.login('admin', 'password');
+    const releasePage = new ReleaseManagementPage(page);
+    await releasePage.navigateToReleaseManagement();
+    const releaseName = 'Release-' + Date.now();
+    await releasePage.createRelease(releaseName, '1.0.0');
+    await releasePage.waitForState(releaseName, 'DRAFT');
+    await expect(page.locator('text=DRAFT')).toBeVisible();
+  });
 });
