@@ -16,7 +16,7 @@ export async function loginUser(request: APIRequestContext, username: string, pa
   const res = await apiFetch(request, /api/auth/login, { method: 'POST', data: { username, password } });
   if (!res.ok()) throw new Error(login failed: .status());
   const body = await res.json();
-  return body.accessToken ?? body.token ?? '';
+  return body.accessToken ??body.token ?? '';
 }
 
 export async function loginAsAdmin(request: APIRequestContext): Promise<string> {
@@ -39,32 +39,6 @@ export async function createRelease(request: APIRequestContext, token: string, p
   const res = await apiFetch(request, /api/releases, { method: 'POST', headers: { Authorization: Bearer  }, data: { productId, name, version } });
   if (!res.ok()) throw new Error(create release failed: );
   return res.json();
-}
-
-export async function getReleaseByName(request: APIRequestContext, token: string, name: string) {
-  const res = await apiFetch(request, /api/releases, { headers: { Authorization: Bearer  } });
-  if (!res.ok()) return undefined;
-  const releases = await res.json();
-  return releases.find(r => r.name === name);
-}
-
-export async function transitionRelease(request: APIRequestContext, token: string, releaseId: number, targetStatus: string) {
-  const res = await apiFetch(request, /api/releases//transition, { method: 'POST', headers: { Authorization: Bearer  }, data: { status: targetStatus } });
-  if (!res.ok()) throw new Error(	ransition failed: );
-  return res.json();
-}
-
-export async function getAuditLogs(request: APIRequestContext, token: string) {
-  const res = await apiFetch(request, /api/audit-logs, { headers: { Authorization: Bearer  } });
-  if (!res.ok()) throw new Error('Failed to fetch audit logs');
-  return res.json();
-}
-
-export async function exportAndVerifyCsv(request: APIRequestContext, token: string, releaseName: string): Promise<boolean> {
-  const res = await apiFetch(request, /api/releases/export.csv, { headers: { Authorization: Bearer  } });
-  if (!res.ok()) throw new Error('Failed to export CSV');
-  const csv = await res.text();
-  return csv.includes(releaseName);
 }
 
 export {};
