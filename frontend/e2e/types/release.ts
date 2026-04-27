@@ -1,1 +1,6 @@
-export type ReleaseStatus = 'DRAFT' | 'TESTING' | 'APPROVED' | 'RELEASED';
+export enum ReleaseStatus {
+	DRAFT = 'DRAFT',
+	TESTING = 'TESTING',
+	APPROVED = 'APPROVED',
+	RELEASED = 'RELEASED'
+}
