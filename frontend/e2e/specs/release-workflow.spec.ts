@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { registerUser, loginAsAdmin, ensureProductm, createRelease } from '../utils/api-client';
+import { registerUser, loginAsAdmin, ensureProduct, createRelease } from '../utils/api-client';
+import { AuthPage } from '../pages/auth.page';
+import { ReleaseManagementPage } from '../pages/release-management.page';
 
 test.describe('Admin release lifecycle', () => {
   test.beforeAll(async ({ browser }) => {
@@ -9,5 +11,11 @@ test.describe('Admin release lifecycle', () => {
     await adminPage.close();
   });
 
-  // tests will be added in next commits
+  test('admin can login and reach release management', async ({ page }) => {
+    const authPage = new AuthPage(page);
+    await authPage.login('admin', 'password');
+    const releasePage = new ReleaseManagementPage(page);
+    await releasePage.navigateToReleaseManagement();
+    await expect(page.locator('h1:has-text("Releases")')).toBeVisible();
+  });
 });
