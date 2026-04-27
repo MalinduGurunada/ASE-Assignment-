@@ -60,4 +60,11 @@ export async function getAuditLogs(request: APIRequestContext, token: string) {
   return res.json();
 }
 
+export async function exportAndVerifyCsv(request: APIRequestContext, token: string, releaseName: string): Promise<boolean> {
+  const res = await apiFetch(request, /api/releases/export.csv, { headers: { Authorization: Bearer  } });
+  if (!res.ok()) throw new Error('Failed to export CSV');
+  const csv = await res.text();
+  return csv.includes(releaseName);
+}
+
 export {};
