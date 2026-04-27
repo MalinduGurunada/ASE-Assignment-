@@ -4,3 +4,10 @@ export enum ReleaseStatus {
 	APPROVED = 'APPROVED',
 	RELEASED = 'RELEASED'
 }
+
+export interface Release {
+	id: number;
+	name: string;
+	version: string;
+	status: ReleaseStatus;
+}
