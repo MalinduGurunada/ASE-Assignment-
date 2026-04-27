@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ReleaseService } from '../../../core/services/release.service';
 import { DeploymentService } from '../../../core/services/deployment.service';
 import { ProductService } from '../../../core/services/product.service';
@@ -40,9 +41,9 @@ export class MetricsComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     forkJoin({
-      releases: this.releaseService.list(),
-      deployments: this.deploymentService.list(),
-      products: this.productService.list()
+      releases: this.releaseService.list().pipe(catchError(() => of([]))),
+      deployments: this.deploymentService.list().pipe(catchError(() => of([]))),
+      products: this.productService.list().pipe(catchError(() => of([])))
     }).subscribe(({ releases, deployments, products }) => {
       this.activeProducts = products.length;
       this.totalDeployments = deployments.length;
