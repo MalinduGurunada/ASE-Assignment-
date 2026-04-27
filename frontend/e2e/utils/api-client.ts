@@ -6,6 +6,13 @@ async function apiFetch(request: APIRequestContext, path: string, options: any =
   return request.fetch(url, options);
 }
 
-// scaffold: concrete helpers will be implemented in subsequent commits
+export async function registerUser(request: APIRequestContext, username: string, password: string, role: 'ADMIN' | 'VIEWER') {
+  const res = await apiFetch(request, `/api/auth/register`, {
+    method: 'POST',
+    data: { username, email: `${username}@e2e.local`, password, role }
+  });
+  if (!res.ok()) throw new Error(`register failed: ${res.status()}`);
+  return res;
+}
 
 export {};
