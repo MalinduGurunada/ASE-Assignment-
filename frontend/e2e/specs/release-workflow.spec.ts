@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { registerUser, loginAsAdmin, ensureProduct, createRelease, transitionRelease } from '../utils/api-client';
+import { registerUser, loginAsAdmin, ensureProduct, createRelease, transitionRelease, getAuditLogs, exportAndVerifyCsv } from '../utils/api-client';
 import { AuthPage } from '../pages/auth.page';
 import { ReleaseManagementPage } from '../pages/release-management.page';
 
@@ -46,5 +46,14 @@ test.describe('Admin release lifecycle', () => {
     const releasePage = new ReleaseManagementPage(page);
     await releasePage.transitionRelease('Release-' + Date.now(), 'RELEASED');
     await expect(page.locator('text=RELEASED')).toBeVisible();
+  });
+
+  test('verify audit logs and CSV export', async ({ page, request }) => {
+    const adminToken = await loginAsAdmin(request);
+    const logs = await getAuditLogs(request, adminToken);
+    expect(logs.length).toBeGreaterThanOrEqual(3);
+    const releaseName = 'Release-' + Date.now();
+    const csvContainsRelease = await exportAndVerifyCsv(request, adminToken, releaseName);
+    expect(csvContainsRelease).toBeTruthy();
   });
 });
