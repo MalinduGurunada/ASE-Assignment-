@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { registerUser, loginAsAdmin, ensureProduct, createRelease } from '../utils/api-client';
+import { registerUser, loginAsAdmin, ensureProduct, createRelease, transitionRelease } from '../utils/api-client';
 import { AuthPage } from '../pages/auth.page';
 import { ReleaseManagementPage } from '../pages/release-management.page';
 
@@ -28,5 +28,23 @@ test.describe('Admin release lifecycle', () => {
     await releasePage.createRelease(releaseName, '1.0.0');
     await releasePage.waitForState(releaseName, 'DRAFT');
     await expect(page.locator('text=DRAFT')).toBeVisible();
+  });
+
+  test('admin transitions release from DRAFT to TESTING', async ({ page }) => {
+    const releasePage = new ReleaseManagementPage(page);
+    await releasePage.transitionRelease('Release-' + Date.now(), 'TESTING');
+    await expect(page.locator('text=TESTING')).toBeVisible();
+  });
+
+  test('admin transitions release from TESTING to APPROVED', async ({ page }) => {
+    const releasePage = new ReleaseManagementPage(page);
+    await releasePage.transitionRelease('Release-' + Date.now(), 'APPROVED');
+    await expect(page.locator('text=APPROVED')).toBeVisible();
+  });
+
+  test('admin transitions release from APPROVED to RELEASED', async ({ page }) => {
+    const releasePage = new ReleaseManagementPage(page);
+    await releasePage.transitionRelease('Release-' + Date.now(), 'RELEASED');
+    await expect(page.locator('text=RELEASED')).toBeVisible();
   });
 });
