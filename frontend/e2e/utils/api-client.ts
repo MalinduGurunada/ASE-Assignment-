@@ -25,4 +25,4 @@ export async function loginUser(request: APIRequestContext, username: string, pa
   return body.accessToken ?? body.token ?? '';
 }
 
-export {};
+export async function loginAsAdmin(request: APIRequestContext): Promise<string> { return loginUser(request, 'admin', 'password'); } export {};
