@@ -9,3 +9,7 @@ export const VIEWER_USER = {
   username: process.env.PW_VIEWER_USERNAME ?? 'viewer',
   password: process.env.PW_VIEWER_PASSWORD ?? 'Viewer#12345'
 };
+
+export function uniqueSuffix(): string {
+  return Date.now().toString(36);
+}
