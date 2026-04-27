@@ -18,5 +18,13 @@ export default defineConfig({
       reuseExistingServer: true,
       timeout: 240000
     }
+    ,
+    {
+      command: 'npm start -- --host localhost --port 4200',
+      url: 'http://localhost:4200',
+      cwd: '.',
+      reuseExistingServer: true,
+      timeout: 180000
+    }
   ]
 });
