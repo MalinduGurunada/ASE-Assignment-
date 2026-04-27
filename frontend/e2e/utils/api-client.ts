@@ -54,4 +54,10 @@ export async function transitionRelease(request: APIRequestContext, token: strin
   return res.json();
 }
 
+export async function getAuditLogs(request: APIRequestContext, token: string) {
+  const res = await apiFetch(request, /api/audit-logs, { headers: { Authorization: Bearer  } });
+  if (!res.ok()) throw new Error('Failed to fetch audit logs');
+  return res.json();
+}
+
 export {};
