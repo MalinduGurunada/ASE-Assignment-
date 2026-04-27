@@ -1,6 +1,6 @@
 .atlassian-bg {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0747a6 0%, #0052cc 50%, #2684ff 100%);
+  background: #1d2125;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,9 +9,9 @@
 
 .auth-card {
   background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 8px 32px rgba(9,30,66,.35);
-  padding: 40px 40px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(9,30,66,.35);
+  padding: 44px 44px 36px;
   width: 100%;
   max-width: 400px;
 }
@@ -21,32 +21,32 @@
   align-items: center;
   gap: 10px;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .auth-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: #0052cc;
+  width: 44px;
+  height: 44px;
+  background: #0c66e4;
   color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .auth-logo-text {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
   color: #172b4d;
   letter-spacing: .04em;
 }
 
 .auth-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #172b4d;
   text-align: center;
   margin: 0 0 4px;
@@ -54,9 +54,9 @@
 
 .auth-subtitle {
   font-size: 13px;
-  color: #6b778c;
+  color: #626f86;
   text-align: center;
-  margin: 0 0 24px;
+  margin: 0 0 28px;
 }
 
 .auth-form {
@@ -68,31 +68,31 @@
 .field-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 
   label {
     font-size: 12px;
     font-weight: 600;
-    color: #344563;
+    color: #172b4d;
     text-transform: none;
     letter-spacing: 0;
   }
 
   input {
     font-size: 14px;
-    padding: 8px 10px;
-    border: 2px solid #dfe1e6;
-    border-radius: 3px;
+    padding: 9px 12px;
+    border: 1px solid #dcdfe4;
+    border-radius: 4px;
     color: #172b4d;
-    background: #fafbfc;
+    background: #f7f8f9;
     width: 100%;
-    transition: border-color .15s, background .15s;
+    transition: border-color .15s, background .15s, box-shadow .15s;
 
     &:focus {
       outline: none;
-      border-color: #4c9aff;
+      border-color: #0c66e4;
       background: #fff;
-      box-shadow: 0 0 0 2px rgba(76,154,255,.2);
+      box-shadow: 0 0 0 2px rgba(12,102,228,.2);
     }
   }
 }
@@ -103,38 +103,38 @@
   gap: 8px;
   font-size: 13px;
   padding: 10px 12px;
-  border-radius: 3px;
+  border-radius: 4px;
   border-left: 3px solid;
 }
 
 .auth-alert-error {
-  background: #ffebe6;
-  border-color: #de350b;
-  color: #bf2600;
+  background: #ffeceb;
+  border-color: #ca3521;
+  color: #ae2a19;
 }
 
 .auth-alert-success {
-  background: #e3fcef;
-  border-color: #36b37e;
-  color: #006644;
+  background: #dcfff1;
+  border-color: #22a06b;
+  color: #216e4e;
 }
 
 .token-preview {
   font-size: 11px;
-  color: #6b778c;
+  color: #626f86;
   word-break: break-all;
-  background: #f4f5f7;
+  background: #f7f8f9;
   padding: 8px 10px;
-  border-radius: 3px;
-  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  border: 1px solid #dcdfe4;
 }
 
 .auth-submit {
-  background: #0052cc;
+  background: #0c66e4;
   color: #fff;
   border: none;
-  border-radius: 3px;
-  padding: 10px;
+  border-radius: 4px;
+  padding: 11px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -142,37 +142,38 @@
   transition: background .15s;
   margin-top: 4px;
 
-  &:hover:not(:disabled) { background: #0747a6; }
-  &:disabled { opacity: .6; cursor: default; }
+  &:hover:not(:disabled) { background: #0055cc; }
+  &:disabled { opacity: .55; cursor: default; }
 }
 
 .auth-divider {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 20px 0 16px;
-  color: #97a0af;
+  margin: 22px 0 16px;
+  color: #626f86;
   font-size: 12px;
 
   &::before, &::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: #dfe1e6;
+    background: #dcdfe4;
   }
 }
 
 .auth-link-btn {
   display: block;
   text-align: center;
-  padding: 8px;
+  padding: 9px;
   font-size: 14px;
-  color: #0052cc;
-  border: 1px solid #dfe1e6;
-  border-radius: 3px;
+  color: #0c66e4;
+  border: 1px solid #dcdfe4;
+  border-radius: 4px;
   background: #fff;
   text-decoration: none;
-  transition: background .12s;
+  font-weight: 500;
+  transition: background .12s, border-color .12s;
 
-  &:hover { background: #f4f5f7; text-decoration: none; }
+  &:hover { background: #f1f2f4; border-color: #b3bac5; text-decoration: none; }
 }

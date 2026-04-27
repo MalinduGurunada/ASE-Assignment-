@@ -1,23 +1,18 @@
 .cf-page-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: #deebff;
-  border-radius: 6px;
-  margin-bottom: 8px;
-  color: #0052cc;
+  background: #e9f2ff;
+  color: #0c66e4;
 }
 
-.stat-card-red { border-left: 3px solid #de350b; }
-.stat-value-red { color: #de350b !important; }
+.stat-card-red {
+  border-top: 3px solid #ca3521;
+  .stat-value { color: #ca3521; }
+}
 
 .chart-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .chart-wrap {

@@ -67,7 +67,9 @@
       "Bash(nslookup -type=A qgyrlshqwshvylbhjtbh.supabase.co 8.8.8.8)",
       "Bash(curl -s -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\\\\\"username\\\\\":\\\\\"admin\\\\\",\\\\\"password\\\\\":\\\\\"admin123\\\\\"}')",
       "Bash(curl -s -w \"\\\\nHTTP:%{http_code}\" http://localhost:8080/api/releases -H \"Authorization: Bearer $\\(curl -s -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\\\\\"username\\\\\":\\\\\"admin\\\\\",\\\\\"password\\\\\":\\\\\"admin123\\\\\"}')",
-      "Bash(node find_region.js)"
+      "Bash(node find_region.js)",
+      "Read(//c/Users/Dell/Desktop/student3_k6_spike_stress/**)",
+      "Read(//c/Users/Dell/Desktop/student3_k6_spike_stress/backend/**)"
     ]
   }
 }

@@ -21,22 +21,22 @@
 <div class="cf-stat-grid">
   <div class="cf-stat-card">
     <h3>Releases Completed</h3>
-    <div class="stat-value">15</div>
-    <div class="stat-label">This month</div>
+    <div class="stat-value">{{ releasesCompleted }}</div>
+    <div class="stat-label">All time</div>
   </div>
   <div class="cf-stat-card">
     <h3>Active Products</h3>
-    <div class="stat-value">4</div>
+    <div class="stat-value">{{ activeProducts }}</div>
     <div class="stat-label">In pipeline</div>
   </div>
   <div class="cf-stat-card">
     <h3>Deployments</h3>
-    <div class="stat-value">23</div>
-    <div class="stat-label">Total this month</div>
+    <div class="stat-value">{{ totalDeployments }}</div>
+    <div class="stat-label">Total</div>
   </div>
   <div class="cf-stat-card stat-card-red">
     <h3>Failed</h3>
-    <div class="stat-value stat-value-red">4</div>
+    <div class="stat-value">{{ failedDeployments }}</div>
     <div class="stat-label">Deployment failures</div>
   </div>
 </div>

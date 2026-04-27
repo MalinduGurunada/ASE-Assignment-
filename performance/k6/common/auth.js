@@ -19,7 +19,7 @@ export function loginAsAdmin() {
   return token;
 }
 
-export function ensureProduct(token, payload) {
+export function ensureProduct(token, payload = { name: 'k6-load-test-product', description: 'Created by k6 load test' }) {
   const res = http.post(`${BASE_URL}/api/products`, JSON.stringify(payload), authHeaders(token));
   return res.json('id');
 }
