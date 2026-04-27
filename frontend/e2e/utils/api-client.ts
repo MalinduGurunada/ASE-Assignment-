@@ -41,4 +41,11 @@ export async function createRelease(request: APIRequestContext, token: string, p
   return res.json();
 }
 
+export async function getReleaseByName(request: APIRequestContext, token: string, name: string) {
+  const res = await apiFetch(request, /api/releases, { headers: { Authorization: Bearer  } });
+  if (!res.ok()) return undefined;
+  const releases = await res.json();
+  return releases.find(r => r.name === name);
+}
+
 export {};
