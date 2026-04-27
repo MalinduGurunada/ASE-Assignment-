@@ -18,4 +18,14 @@ export class ReleaseManagementPage {
     await this.page.locator('input[name="version"]').fill(version);
     await this.page.locator('button:has-text("Submit")').click();
   }
+
+  async waitForState(releaseName: string, expectedState: string, timeoutMs: number = 20000) {
+    const startTime = Date.now();
+    while (Date.now() - startTime < timeoutMs) {
+      const badge = await this.page.locator(	ext=).locator('..').locator('.status-badge').textContent();
+      if (badge === expectedState) return;
+      await this.page.waitForTimeout(500);
+    }
+    throw new Error(Timeout waiting for state  for );
+  }
 }
