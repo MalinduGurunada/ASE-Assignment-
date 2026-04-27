@@ -1,5 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -8,14 +10,20 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const authService = inject(AuthService);
+  const router = inject(Router);
   const token = authService.getToken();
-  if (!token) {
-    return next(req);
-  }
 
-  return next(req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
-  }));
+  const authReq = token
+    ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+    : req;
+
+  return next(authReq).pipe(
+    catchError((err) => {
+      if (err.status === 401 || err.status === 403) {
+        authService.clearToken();
+        router.navigate(['/auth/login']);
+      }
+      return throwError(() => err);
+    })
+  );
 };

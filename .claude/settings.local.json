@@ -56,7 +56,18 @@
       "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"password\"}')",
       "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/register -H 'Content-Type: application/json' -d '{\"username\":\"admin2\",\"email\":\"admin2@rmt.local\",\"password\":\"admin123\",\"role\":\"ADMIN\"}')",
       "Bash(curl -s -w '\\\\nHTTP:%{http_code}' -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"admin123\"}')",
-      "Bash(xargs cat *)"
+      "Bash(xargs cat *)",
+      "Bash(grep -v \"^\\\\[ERROR\\\\] $\")",
+      "Bash(nslookup db.qgyrlshqwshvylbhjtbh.supabase.co 8.8.8.8)",
+      "Bash(nslookup -type=A db.qgyrlshqwshvylbhjtbh.supabase.co 8.8.8.8)",
+      "PowerShell(Resolve-DnsName db.qgyrlshqwshvylbhjtbh.supabase.co -ErrorAction SilentlyContinue)",
+      "PowerShell(Resolve-DnsName db.qgyrlshqwshvylbhjtbh.supabase.co -Server 8.8.8.8 -ErrorAction SilentlyContinue)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 5 \"https://qgyrlshqwshvylbhjtbh.supabase.co/rest/v1/\")",
+      "Bash(nslookup qgyrlshqwshvylbhjtbh.supabase.co 8.8.8.8)",
+      "Bash(nslookup -type=A qgyrlshqwshvylbhjtbh.supabase.co 8.8.8.8)",
+      "Bash(curl -s -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\\\\\"username\\\\\":\\\\\"admin\\\\\",\\\\\"password\\\\\":\\\\\"admin123\\\\\"}')",
+      "Bash(curl -s -w \"\\\\nHTTP:%{http_code}\" http://localhost:8080/api/releases -H \"Authorization: Bearer $\\(curl -s -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' -d '{\\\\\"username\\\\\":\\\\\"admin\\\\\",\\\\\"password\\\\\":\\\\\"admin123\\\\\"}')",
+      "Bash(node find_region.js)"
     ]
   }
 }

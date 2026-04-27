@@ -1,0 +1,29 @@
+
+> frontend@0.0.0 start
+> ng serve
+
+Initial chunk files | Names             |  Raw size
+polyfills.js        | polyfills         |  88.09 kB | 
+main.js             | main              |  21.83 kB | 
+styles.css          | styles            |   8.22 kB | 
+chunk-HEPRUB7A.js   | -                 |   1.56 kB | 
+
+                    | Initial total     | 119.70 kB
+
+Lazy chunk files    | Names             |  Raw size
+chunk-GVGJQRBD.js   | product-module    |  43.13 kB | 
+chunk-WRS5WIYY.js   | deployment-module |  28.72 kB | 
+chunk-HPYC43OP.js   | auth-module       |  24.32 kB | 
+chunk-WH22F7PU.js   | dashboard-module  |   7.76 kB | 
+chunk-6Z4JCF2C.js   | -                 |   1.52 kB | 
+
+Application bundle generation complete. [4.749 seconds]
+
+Watch mode enabled. Watching for file changes...
+  ➜  Local:   http://localhost:4200/
+Initial chunk files | Names | Raw size
+main.js             | main  | 22.14 kB | 
+
+Application bundle generation complete. [0.402 seconds]
+
+Page reload sent to client(s).
