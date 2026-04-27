@@ -6,4 +6,9 @@ export class ReleaseManagementPage {
   constructor(page: Page) {
     this.page = page;
   }
+
+  async navigateToReleaseManagement() {
+    await this.page.locator('a:has-text("Releases")').click();
+    await this.page.locator('h1:has-text("Releases")').waitFor();
+  }
 }
