@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { Router, RouterLink } from '@angular/router';
+=======
+>>>>>>> shazaan
 import { AuthService } from '../../../core/services/auth.service';
 import { Role } from '../../../core/models';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
+=======
+  imports: [CommonModule, ReactiveFormsModule],
+>>>>>>> shazaan
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })
@@ -26,8 +33,12 @@ export class RegistrationComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
+<<<<<<< HEAD
     private readonly authService: AuthService,
     private readonly router: Router
+=======
+    private readonly authService: AuthService
+>>>>>>> shazaan
   ) {}
 
   submit(): void {
@@ -42,7 +53,13 @@ export class RegistrationComponent {
 
     this.authService.register(this.form.getRawValue()).subscribe({
       next: () => {
+<<<<<<< HEAD
         this.router.navigate(['/dashboard']);
+=======
+        this.loading = false;
+        this.success = 'Registration succeeded and token was saved.';
+        this.form.patchValue({ password: '' });
+>>>>>>> shazaan
       },
       error: (err) => {
         this.loading = false;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="cf-breadcrumb">
   <a routerLink="/dashboard">RMT</a>
   <span>›</span>
@@ -77,3 +78,27 @@
     </tbody>
   </table>
 </div>
+=======
+<section>
+  <h2>Product Management</h2>
+  <form class="product-form" [formGroup]="form" (ngSubmit)="createProduct()">
+    <label>Name <input type="text" formControlName="name" /></label>
+    <label>Description <input type="text" formControlName="description" /></label>
+    <button type="submit">Create Product</button>
+  </form>
+  <p *ngIf="loading">Loading products...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <table>
+    <thead><tr><th>Product</th><th>Description</th><th>Created</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.createdAt | date:'short' }}</td>
+        <td><button type="button" (click)="deleteProduct(product.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+>>>>>>> shazaan

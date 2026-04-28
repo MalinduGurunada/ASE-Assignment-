@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .cf-page-icon {
   background: #dcfff1;
   color: #216e4e;
@@ -36,4 +37,47 @@
   font-family: inherit;
 
   &:hover { background: #ffeceb; border-color: #f5c6c2; }
+=======
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+}
+
+button {
+  width: fit-content;
+  padding: 0.5rem 0.8rem;
+  background: #0f766e;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+th,
+td {
+  border-bottom: 1px solid #cbd5e1;
+  text-align: left;
+  padding: 0.6rem;
+>>>>>>> shazaan
 }

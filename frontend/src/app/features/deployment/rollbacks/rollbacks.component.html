@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="cf-breadcrumb">
   <a routerLink="/dashboard">RMT</a>
   <span>›</span>
@@ -58,3 +59,16 @@
     </tbody>
   </table>
 </div>
+=======
+<section>
+  <h2>Rollback Operations</h2>
+  <p>Rollback-ready deployments are listed below.</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+  <ul>
+    <li *ngFor="let deployment of deployments">
+      {{ deployment.environmentName }} - {{ deployment.releaseName }} - {{ deployment.status }}
+      <button type="button" (click)="rollback(deployment)">Rollback</button>
+    </li>
+  </ul>
+</section>
+>>>>>>> shazaan

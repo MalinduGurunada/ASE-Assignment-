@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
@@ -6,12 +7,17 @@ import { catchError } from 'rxjs/operators';
 import { ReleaseService } from '../../../core/services/release.service';
 import { DeploymentService } from '../../../core/services/deployment.service';
 import { ProductService } from '../../../core/services/product.service';
+=======
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
+>>>>>>> shazaan
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-metrics',
   standalone: true,
+<<<<<<< HEAD
   imports: [RouterLink],
   templateUrl: './metrics.component.html',
   styleUrl: './metrics.component.scss'
@@ -111,6 +117,25 @@ export class MetricsComponent implements OnInit, AfterViewInit, OnDestroy {
           {
             label: 'Releases Completed',
             data: this.weeklyReleases,
+=======
+  imports: [],
+  templateUrl: './metrics.component.html',
+  styleUrl: './metrics.component.scss'
+})
+export class MetricsComponent implements AfterViewInit, OnDestroy {
+
+  private chart?: Chart;
+
+  ngAfterViewInit(): void {
+    this.chart = new Chart('releaseFlowChart', {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [
+          {
+            label: 'Releases Completed',
+            data: [2, 4, 3, 6],
+>>>>>>> shazaan
             borderColor: '#0f766e',
             backgroundColor: 'rgba(15, 118, 110, 0.25)',
             tension: 0.35,
@@ -118,7 +143,11 @@ export class MetricsComponent implements OnInit, AfterViewInit, OnDestroy {
           },
           {
             label: 'Failed Deployments',
+<<<<<<< HEAD
             data: this.weeklyFailed,
+=======
+            data: [1, 0, 2, 1],
+>>>>>>> shazaan
             borderColor: '#dc2626',
             backgroundColor: 'rgba(220, 38, 38, 0.2)',
             tension: 0.35,
@@ -132,4 +161,12 @@ export class MetricsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
+<<<<<<< HEAD
+=======
+
+  ngOnDestroy(): void {
+    this.chart?.destroy();
+  }
+
+>>>>>>> shazaan
 }

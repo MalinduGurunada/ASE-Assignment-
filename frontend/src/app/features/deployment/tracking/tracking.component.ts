@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
+=======
+>>>>>>> shazaan
 import { Deployment, DeploymentStatus, Release } from '../../../core/models';
 import { DeploymentService } from '../../../core/services/deployment.service';
 import { ReleaseService } from '../../../core/services/release.service';
@@ -9,7 +12,11 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-tracking',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
+=======
+  imports: [CommonModule, ReactiveFormsModule],
+>>>>>>> shazaan
   templateUrl: './tracking.component.html',
   styleUrl: './tracking.component.scss'
 })
@@ -24,6 +31,7 @@ export class TrackingComponent implements OnInit {
   releases: Release[] = [];
   deployments: Deployment[] = [];
   error = '';
+<<<<<<< HEAD
   showForm = false;
 
   statusBadge(status: string): string {
@@ -32,6 +40,8 @@ export class TrackingComponent implements OnInit {
     };
     return map[status] ?? 'badge-gray';
   }
+=======
+>>>>>>> shazaan
 
   constructor(
     private readonly formBuilder: FormBuilder,

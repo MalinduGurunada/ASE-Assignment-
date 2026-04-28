@@ -1,13 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
+=======
+>>>>>>> shazaan
 import { Deployment } from '../../../core/models';
 import { DeploymentService } from '../../../core/services/deployment.service';
 
 @Component({
   selector: 'app-rollbacks',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, RouterLink],
+=======
+  imports: [CommonModule],
+>>>>>>> shazaan
   templateUrl: './rollbacks.component.html',
   styleUrl: './rollbacks.component.scss'
 })

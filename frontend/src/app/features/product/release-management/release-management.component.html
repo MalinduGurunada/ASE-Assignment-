@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="cf-breadcrumb">
   <a routerLink="/dashboard">RMT</a>
   <span>›</span>
@@ -134,3 +135,63 @@
     <li *ngIf="changelogEntries.length === 0" class="changelog-empty">No entries yet.</li>
   </ul>
 </div>
+=======
+<section>
+  <h2>Release Management</h2>
+
+  <form class="release-form" [formGroup]="releaseForm" (ngSubmit)="createRelease()">
+    <label>
+      Product
+      <select formControlName="productId">
+        <option [ngValue]="0">Select product</option>
+        <option *ngFor="let product of products" [ngValue]="product.id">{{ product.name }}</option>
+      </select>
+    </label>
+    <label>Version <input type="text" formControlName="version" /></label>
+    <label>Name <input type="text" formControlName="name" /></label>
+    <button type="submit">Create Release</button>
+    <button type="button" (click)="exportCsv()">Export CSV</button>
+  </form>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <table>
+    <thead><tr><th>Name</th><th>Product</th><th>Version</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let release of releases">
+        <td>{{ release.name }}</td>
+        <td>{{ release.productName }}</td>
+        <td>{{ release.version }}</td>
+        <td>{{ release.status }}</td>
+        <td>
+          <button type="button" (click)="selectReleaseForChangelog(release.id)">Changelog</button>
+          <button
+            type="button"
+            *ngIf="nextStatus(release.status) as next"
+            (click)="transitionRelease(release.id, next)"
+          >
+            Move to {{ next }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="changelog-box">
+    <h3>Changelog Entries</h3>
+    <form [formGroup]="changelogForm" (ngSubmit)="addChangelog()">
+      <label>Release ID <input type="number" formControlName="releaseId" /></label>
+      <label>Title <input type="text" formControlName="title" /></label>
+      <label>Type <input type="text" formControlName="entryType" /></label>
+      <label>Description <input type="text" formControlName="description" /></label>
+      <button type="submit">Add Entry</button>
+    </form>
+
+    <ul>
+      <li *ngFor="let entry of changelogEntries">
+        <strong>{{ entry.title }}</strong> ({{ entry.entryType }}): {{ entry.description }}
+      </li>
+    </ul>
+  </div>
+</section>
+>>>>>>> shazaan

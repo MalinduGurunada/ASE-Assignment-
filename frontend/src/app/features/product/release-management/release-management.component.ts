@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
+=======
+>>>>>>> shazaan
 import { ChangelogEntry, Product, Release, ReleaseStatus } from '../../../core/models';
 import { ChangelogService } from '../../../core/services/changelog.service';
 import { ProductService } from '../../../core/services/product.service';
@@ -10,7 +13,11 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-release-management',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
+=======
+  imports: [CommonModule, ReactiveFormsModule],
+>>>>>>> shazaan
   templateUrl: './release-management.component.html',
   styleUrl: './release-management.component.scss'
 })
@@ -33,6 +40,7 @@ export class ReleaseManagementComponent implements OnInit {
   changelogEntries: ChangelogEntry[] = [];
   statusOptions: ReleaseStatus[] = ['DRAFT', 'TESTING', 'APPROVED', 'RELEASED'];
   error = '';
+<<<<<<< HEAD
   showForm = false;
   selectedReleaseId: number | null = null;
 
@@ -42,6 +50,8 @@ export class ReleaseManagementComponent implements OnInit {
     };
     return map[status] ?? 'badge-gray';
   }
+=======
+>>>>>>> shazaan
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -107,7 +117,10 @@ export class ReleaseManagementComponent implements OnInit {
   }
 
   selectReleaseForChangelog(releaseId: number): void {
+<<<<<<< HEAD
     this.selectedReleaseId = releaseId;
+=======
+>>>>>>> shazaan
     this.changelogForm.patchValue({ releaseId });
     this.changelogService.listByRelease(releaseId).subscribe({
       next: (entries) => {

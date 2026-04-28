@@ -115,12 +115,12 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.flywaydb</groupId>
+    			<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
 					<url>jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require</url>
 					<user>postgres.qgyrlshqwshvylbhjtbh</user>
-					<password>Diabalo@666</password>
+					<password>${env.RMT_DB_PASSWORD}</password>
 					<cleanDisabled>false</cleanDisabled>
 				</configuration>
 			</plugin>

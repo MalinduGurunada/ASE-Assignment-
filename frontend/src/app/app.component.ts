@@ -1,17 +1,26 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './core/services/auth.service';
+=======
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+>>>>>>> shazaan
 
 @Component({
   selector: 'app-root',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+=======
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+>>>>>>> shazaan
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Release Management Tool';
+<<<<<<< HEAD
   productsOpen = true;
   deploymentsOpen = true;
 
@@ -25,4 +34,6 @@ export class AppComponent {
     this.authService.clearToken();
     this.router.navigate(['/auth/login']);
   }
+=======
+>>>>>>> shazaan
 }

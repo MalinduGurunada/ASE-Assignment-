@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .atlassian-bg {
   min-height: 100vh;
   background: #1d2125;
@@ -167,4 +168,42 @@
   transition: background .12s, border-color .12s;
 
   &:hover { background: #f1f2f4; border-color: #b3bac5; text-decoration: none; }
+=======
+.auth-panel {
+  max-width: 600px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+input,
+select {
+  padding: 0.6rem;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+}
+
+button {
+  width: fit-content;
+  padding: 0.55rem 0.8rem;
+  background: #0f766e;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+}
+
+.success {
+  color: #15803d;
+}
+
+.error {
+  color: #b91c1c;
+>>>>>>> shazaan
 }
