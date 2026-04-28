@@ -107,6 +107,7 @@ test.describe('RBAC enforcement', () => {
 				Authorization: `Bearer ${viewerToken}`
 			},
 			data: {
+				productId: 1,
 				name: 'updated-by-viewer',
 				version: '1.0.1-viewer'
 			}

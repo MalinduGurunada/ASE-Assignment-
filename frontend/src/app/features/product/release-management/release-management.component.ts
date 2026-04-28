@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ChangelogEntry, Product, Release, ReleaseStatus } from '../../../core/models';
 import { ChangelogService } from '../../../core/services/changelog.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { ProductService } from '../../../core/services/product.service';
 import { ReleaseService } from '../../../core/services/release.service';
 
@@ -19,7 +20,7 @@ export class ReleaseManagementComponent implements OnInit {
   readonly releaseForm = this.formBuilder.nonNullable.group({
     productId: [0, Validators.required],
     version: ['', Validators.required],
-    name: ['', Validators.required]
+    name: ['', [Validators.required, Validators.maxLength(200)]]
   });
 
   readonly changelogForm = this.formBuilder.nonNullable.group({
@@ -40,10 +41,15 @@ export class ReleaseManagementComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
     private readonly productService: ProductService,
     private readonly releaseService: ReleaseService,
     private readonly changelogService: ChangelogService
   ) { }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -86,7 +92,7 @@ export class ReleaseManagementComponent implements OnInit {
   }
 
   createRelease(): void {
-    if (this.releaseForm.invalid || this.releaseForm.value.productId === 0) {
+    if (!this.isAdmin || this.releaseForm.invalid || this.releaseForm.value.productId === 0) {
       this.releaseForm.markAllAsTouched();
       return;
     }
@@ -103,6 +109,10 @@ export class ReleaseManagementComponent implements OnInit {
   }
 
   transitionRelease(releaseId: number, nextStatus: ReleaseStatus): void {
+    if (!this.isAdmin) {
+      return;
+    }
+
     this.releaseService.transition(releaseId, nextStatus).subscribe({
       next: () => this.loadReleases(),
       error: (err) => {

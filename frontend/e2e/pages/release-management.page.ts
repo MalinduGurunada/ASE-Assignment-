@@ -1,36 +1,43 @@
-import { Page, Locator } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export class ReleaseManagementPage {
-  private page: Page;
+  readonly createReleaseButton: Locator;
+  readonly productSelect: Locator;
+  readonly versionInput: Locator;
+  readonly nameInput: Locator;
 
-  constructor(page: Page) {
-    this.page = page;
+  constructor(private readonly page: Page) {
+    this.createReleaseButton = page.getByRole('button', { name: /Create release/i });
+    this.productSelect = page.locator('[formcontrolname="productId"]');
+    this.versionInput = page.locator('[formcontrolname="version"]');
+    this.nameInput = page.locator('[formcontrolname="name"]');
+  }
+
+  async goto() {
+    await this.page.goto('/products/releases');
+    await expect(this.page.getByRole('heading', { name: 'Releases' })).toBeVisible();
   }
 
   async navigateToReleaseManagement() {
-    await this.page.locator('a:has-text("Releases")').click();
-    await this.page.locator('h1:has-text("Releases")').waitFor();
+    await this.goto();
   }
 
   async createRelease(name: string, version: string) {
-    await this.page.locator('button:has-text("Create")').click();
-    await this.page.locator('input[name="name"]').fill(name);
-    await this.page.locator('input[name="version"]').fill(version);
-    await this.page.locator('button:has-text("Submit")').click();
+    await this.createReleaseButton.click();
+    await this.productSelect.selectOption({ index: 1 });
+    await this.versionInput.fill(version);
+    await this.nameInput.fill(name);
+    await this.page.getByRole('button', { name: 'Save' }).click();
   }
 
-  async waitForState(releaseName: string, expectedState: string, timeoutMs: number = 20000) {
-    const startTime = Date.now();
-    while (Date.now() - startTime < timeoutMs) {
-      const badge = await this.page.locator(	ext=).locator('..').locator('.status-badge').textContent();
-      if (badge === expectedState) return;
-      await this.page.waitForTimeout(500);
-    }
-    throw new Error(Timeout waiting for state  for );
+  async waitForState(releaseName: string, expectedState: string) {
+    const row = this.page.locator('tbody tr').filter({ hasText: releaseName }).first();
+    await expect(row).toContainText(expectedState, { timeout: 15_000 });
   }
 
   async transitionRelease(releaseName: string, newState: string) {
-    await this.page.locator(	r:has-text("")).locator('button:has-text("Transition")').click();
+    const row = this.page.locator('tbody tr').filter({ hasText: releaseName }).first();
+    await row.getByRole('button', { name: new RegExp(`Move.*${newState}`, 'i') }).click();
     await this.waitForState(releaseName, newState);
   }
 }

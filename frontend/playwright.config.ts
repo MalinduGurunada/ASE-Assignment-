@@ -13,7 +13,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=e2e"',
-      url: 'http://localhost:8080/api/auth/login',
+      url: 'http://localhost:8080/api/products',
       cwd: '../backend',
       reuseExistingServer: true,
       timeout: 240000
@@ -32,7 +32,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: {}
+      use: { channel: 'chrome' }
     }
   ]
 });

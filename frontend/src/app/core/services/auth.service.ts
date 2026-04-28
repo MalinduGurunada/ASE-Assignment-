@@ -30,6 +30,26 @@ export class AuthService {
     return localStorage.getItem(this.tokenStorageKey);
   }
 
+  getRole(): Role | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const payload = token.split('.')[1];
+      const normalizedPayload = payload.replace(/-/g, '+').replace(/_/g, '/');
+      const decoded = JSON.parse(atob(normalizedPayload));
+      return decoded.role === 'ADMIN' || decoded.role === 'VIEWER' ? decoded.role : null;
+    } catch {
+      return null;
+    }
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'ADMIN';
+  }
+
   clearToken(): void {
     localStorage.removeItem(this.tokenStorageKey);
   }

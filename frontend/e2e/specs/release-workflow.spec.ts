@@ -1,59 +1,89 @@
-import { test, expect } from '@playwright/test';
-import { registerUser, loginAsAdmin, ensureProduct, createRelease, transitionRelease, getAuditLogs, exportAndVerifyCsv } from '../utils/api-client';
+import { expect, test } from '@playwright/test';
+import {
+  createRelease,
+  ensureProduct,
+  exportAndVerifyCsv,
+  getAuditLogs,
+  loginUser,
+  registerUser,
+  transitionRelease
+} from '../utils/api-client';
+import { E2E, uniqueSuffix } from '../config/test-data';
 import { AuthPage } from '../pages/auth.page';
 import { ReleaseManagementPage } from '../pages/release-management.page';
 
+test.describe.configure({ mode: 'serial' });
+
 test.describe('Admin release lifecycle', () => {
-  test.beforeAll(async ({ browser }) => {
-    const adminPage = await browser.newPage();
-    const adminToken = await loginAsAdmin(adminPage.request);
-    await ensureProduct(adminPage.request, adminToken, 'TestProduct');
-    await adminPage.close();
+  const adminCreds = {
+    username: `workflow-admin-${uniqueSuffix()}`,
+    password: E2E.adminPassword
+  };
+
+  let adminToken = '';
+  let productId = 0;
+  let apiReleaseName = '';
+  let apiReleaseId = 0;
+
+  test.beforeAll(async ({ request }) => {
+    adminToken = await registerUser(request, {
+      username: adminCreds.username,
+      email: `${adminCreds.username}@rmt.e2e.local`,
+      password: adminCreds.password,
+      role: 'ADMIN'
+    });
+
+    productId = await ensureProduct(request, adminToken, `workflow-product-${uniqueSuffix()}`);
+    apiReleaseName = `workflow-release-${uniqueSuffix()}`;
+    const release = await createRelease(request, adminToken, {
+      productId,
+      version: '1.0.0-workflow',
+      name: apiReleaseName
+    });
+    apiReleaseId = release.id;
   });
 
   test('admin can login and reach release management', async ({ page }) => {
     const authPage = new AuthPage(page);
-    await authPage.login('admin', 'password');
+    await authPage.login(adminCreds.username, adminCreds.password);
+
     const releasePage = new ReleaseManagementPage(page);
     await releasePage.navigateToReleaseManagement();
-    await expect(page.locator('h1:has-text("Releases")')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Releases' })).toBeVisible();
   });
 
-  test('admin creates release in DRAFT state', async ({ page }) => {
+  test('admin creates release in DRAFT state through UI', async ({ page }) => {
     const authPage = new AuthPage(page);
-    await authPage.login('admin', 'password');
+    await authPage.login(adminCreds.username, adminCreds.password);
+
     const releasePage = new ReleaseManagementPage(page);
     await releasePage.navigateToReleaseManagement();
-    const releaseName = 'Release-' + Date.now();
-    await releasePage.createRelease(releaseName, '1.0.0');
+
+    const releaseName = `ui-release-${uniqueSuffix()}`;
+    await releasePage.createRelease(releaseName, '1.0.0-ui');
     await releasePage.waitForState(releaseName, 'DRAFT');
-    await expect(page.locator('text=DRAFT')).toBeVisible();
   });
 
-  test('admin transitions release from DRAFT to TESTING', async ({ page }) => {
-    const releasePage = new ReleaseManagementPage(page);
-    await releasePage.transitionRelease('Release-' + Date.now(), 'TESTING');
-    await expect(page.locator('text=TESTING')).toBeVisible();
+  test('admin transitions release from DRAFT to TESTING to APPROVED to RELEASED', async ({ request }) => {
+    adminToken = await loginUser(request, adminCreds.username, adminCreds.password);
+
+    let release = await transitionRelease(request, adminToken, apiReleaseId, 'TESTING');
+    expect(release.status).toBe('TESTING');
+
+    release = await transitionRelease(request, adminToken, apiReleaseId, 'APPROVED');
+    expect(release.status).toBe('APPROVED');
+
+    release = await transitionRelease(request, adminToken, apiReleaseId, 'RELEASED');
+    expect(release.status).toBe('RELEASED');
   });
 
-  test('admin transitions release from TESTING to APPROVED', async ({ page }) => {
-    const releasePage = new ReleaseManagementPage(page);
-    await releasePage.transitionRelease('Release-' + Date.now(), 'APPROVED');
-    await expect(page.locator('text=APPROVED')).toBeVisible();
-  });
+  test('verify audit logs and CSV export', async ({ request }) => {
+    adminToken = await loginUser(request, adminCreds.username, adminCreds.password);
 
-  test('admin transitions release from APPROVED to RELEASED', async ({ page }) => {
-    const releasePage = new ReleaseManagementPage(page);
-    await releasePage.transitionRelease('Release-' + Date.now(), 'RELEASED');
-    await expect(page.locator('text=RELEASED')).toBeVisible();
-  });
-
-  test('verify audit logs and CSV export', async ({ page, request }) => {
-    const adminToken = await loginAsAdmin(request);
     const logs = await getAuditLogs(request, adminToken);
     expect(logs.length).toBeGreaterThanOrEqual(3);
-    const releaseName = 'Release-' + Date.now();
-    const csvContainsRelease = await exportAndVerifyCsv(request, adminToken, releaseName);
+
+    const csvContainsRelease = await exportAndVerifyCsv(request, adminToken, apiReleaseName);
     expect(csvContainsRelease).toBeTruthy();
   });
 });
