@@ -1,23 +1,137 @@
-<<<<<<< HEAD
 /* ── GT Walsheim ── */
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Thin-Trial-BF651b7fc728c4c.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Thin-Oblique-Trial-BF651b7fc66311a.otf') format('opentype'); font-weight: 100; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Ultra-Light-Trial-BF651b7fc72b236.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Ultra-Light-Oblique-Trial-BF651b7fc635c6e.otf') format('opentype'); font-weight: 200; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Light-Oblique-Trial-BF651b7fc6b04a3.otf') format('opentype'); font-weight: 300; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Regular-Trial-BF651b7fc71a47d.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Regular-Oblique-Trial-BF651b7fc67342f.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Medium-Trial-BF651b7fc728fb3.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Medium-Oblique-Trial-BF651b7fc69eff5.otf') format('opentype'); font-weight: 500; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Bold-Trial-BF651b7fc737c57.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Bold-Oblique-Trial-BF651b7fc5f06a0.otf') format('opentype'); font-weight: 700; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Ultra-Bold-Trial-BF651b7fc6c21e5.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Ultra-Bold-Oblique-Trial-BF651b7fc60ad12.otf') format('opentype'); font-weight: 800; font-style: italic; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Black-Trial-BF651b7fc736a5b.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'GT Walsheim'; src: url('assets/fonts/GT-Walsheim-Black-Oblique-Trial-BF651b7fc5608e6.otf') format('opentype'); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Thin-Trial-BF651b7fc728c4c.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
 
-*, *::before, *::after { box-sizing: border-box; }
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Thin-Oblique-Trial-BF651b7fc66311a.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Ultra-Light-Trial-BF651b7fc72b236.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Ultra-Light-Oblique-Trial-BF651b7fc635c6e.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Light-Trial-BF651b7fc714941.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Light-Oblique-Trial-BF651b7fc6b04a3.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Regular-Trial-BF651b7fc71a47d.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Regular-Oblique-Trial-BF651b7fc67342f.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Medium-Trial-BF651b7fc728fb3.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Medium-Oblique-Trial-BF651b7fc69eff5.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Bold-Trial-BF651b7fc737c57.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Bold-Oblique-Trial-BF651b7fc5f06a0.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Ultra-Bold-Trial-BF651b7fc6c21e5.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Ultra-Bold-Oblique-Trial-BF651b7fc60ad12.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Black-Trial-BF651b7fc736a5b.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('assets/fonts/GT-Walsheim-Black-Oblique-Trial-BF651b7fc5608e6.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -29,13 +143,41 @@ body {
   background: #f7f8f9;
 }
 
-h1 { font-size: 1.75rem; font-weight: 700; color: #172b4d; margin: 0 0 0.25rem; line-height: 1.25; }
-h2 { font-size: 1.14rem; font-weight: 600; color: #172b4d; margin: 0 0 1rem; }
-h3 { font-size: 1rem;    font-weight: 600; color: #172b4d; margin: 0 0 0.75rem; }
-p  { margin: 0 0 0.75rem; }
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #172b4d;
+  margin: 0 0 0.25rem;
+  line-height: 1.25;
+}
 
-a { color: #0c66e4; text-decoration: none; }
-a:hover { text-decoration: underline; color: #0055cc; }
+h2 {
+  font-size: 1.14rem;
+  font-weight: 600;
+  color: #172b4d;
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #172b4d;
+  margin: 0 0 0.75rem;
+}
+
+p {
+  margin: 0 0 0.75rem;
+}
+
+a {
+  color: #0c66e4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #0055cc;
+}
 
 /* ── Global table ── */
 table {
@@ -43,6 +185,7 @@ table {
   border-collapse: collapse;
   background: #fff;
 }
+
 th {
   background: #fff;
   color: #44546f;
@@ -55,14 +198,21 @@ th {
   border-bottom: 2px solid #dcdfe4;
   white-space: nowrap;
 }
+
 td {
   padding: 12px 16px;
   border-bottom: 1px solid #dcdfe4;
   color: #172b4d;
   vertical-align: middle;
 }
-tr:last-child td { border-bottom: none; }
-tr:hover td { background: #f7f8f9; }
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: #f7f8f9;
+}
 
 /* ── Global inputs ── */
 input[type=text],
@@ -82,6 +232,7 @@ textarea {
   transition: border-color .15s, background .15s, box-shadow .15s;
   appearance: none;
 }
+
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus,
@@ -91,9 +242,12 @@ textarea:focus {
   outline: none;
   border-color: #0c66e4;
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(12,102,228,.2);
+  box-shadow: 0 0 0 2px rgba(12, 102, 228, .2);
 }
-input[type=checkbox] { width: auto; }
+
+input[type=checkbox] {
+  width: auto;
+}
 
 label {
   display: block;
@@ -119,25 +273,44 @@ button {
 .btn-primary {
   background: #0c66e4;
   color: #fff;
-  &:hover:not(:disabled) { background: #0055cc; }
-  &:disabled { opacity: .55; cursor: default; }
+
+  &:hover:not(:disabled) {
+    background: #0055cc;
+  }
+
+  &:disabled {
+    opacity: .55;
+    cursor: default;
+  }
 }
+
 .btn-secondary {
   background: #fff;
   color: #172b4d;
   border: 1px solid #dcdfe4;
-  &:hover { background: #f1f2f4; }
+
+  &:hover {
+    background: #f1f2f4;
+  }
 }
+
 .btn-danger {
   background: #ca3521;
   color: #fff;
-  &:hover { background: #ae2a19; }
+
+  &:hover {
+    background: #ae2a19;
+  }
 }
+
 .btn-subtle {
   background: transparent;
   color: #0c66e4;
   padding: 6px 10px;
-  &:hover { background: #e9f2ff; }
+
+  &:hover {
+    background: #e9f2ff;
+  }
 }
 
 /* ── Confluence Lozenges (badges) ── */
@@ -150,16 +323,49 @@ button {
   text-transform: uppercase;
   letter-spacing: .04em;
 }
-.badge-blue   { background: #e9f2ff; color: #0055cc; }
-.badge-green  { background: #dcfff1; color: #216e4e; }
-.badge-yellow { background: #fff7d6; color: #7f5f01; }
-.badge-red    { background: #ffeceb; color: #ae2a19; }
-.badge-gray   { background: #f1f2f4; color: #44546f; }
-.badge-purple { background: #f3f0ff; color: #5e4db2; }
+
+.badge-blue {
+  background: #e9f2ff;
+  color: #0055cc;
+}
+
+.badge-green {
+  background: #dcfff1;
+  color: #216e4e;
+}
+
+.badge-yellow {
+  background: #fff7d6;
+  color: #7f5f01;
+}
+
+.badge-red {
+  background: #ffeceb;
+  color: #ae2a19;
+}
+
+.badge-gray {
+  background: #f1f2f4;
+  color: #44546f;
+}
+
+.badge-purple {
+  background: #f3f0ff;
+  color: #5e4db2;
+}
 
 /* ── Feedback text ── */
-.error-text   { color: #ca3521; font-size: 13px; margin-top: 6px; }
-.success-text { color: #216e4e; font-size: 13px; margin-top: 6px; }
+.error-text {
+  color: #ca3521;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.success-text {
+  color: #216e4e;
+  font-size: 13px;
+  margin-top: 6px;
+}
 
 /* ── Page layout helpers ── */
 .cf-page-header {
@@ -172,6 +378,7 @@ button {
   gap: 1rem;
   flex-wrap: wrap;
 }
+
 .cf-page-icon {
   display: inline-flex;
   align-items: center;
@@ -182,8 +389,18 @@ button {
   margin-bottom: 10px;
   flex-shrink: 0;
 }
-.cf-page-title { font-size: 1.75rem; font-weight: 700; color: #172b4d; }
-.cf-page-meta  { font-size: 13px; color: #44546f; margin-top: 4px; }
+
+.cf-page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #172b4d;
+}
+
+.cf-page-meta {
+  font-size: 13px;
+  color: #44546f;
+  margin-top: 4px;
+}
 
 .cf-breadcrumb {
   font-size: 12px;
@@ -192,14 +409,25 @@ button {
   display: flex;
   align-items: center;
   gap: 0;
-  a { color: #626f86; &:hover { color: #0c66e4; text-decoration: none; } }
-  span { margin: 0 5px; }
+
+  a {
+    color: #626f86;
+
+    &:hover {
+      color: #0c66e4;
+      text-decoration: none;
+    }
+  }
+
+  span {
+    margin: 0 5px;
+  }
 }
 
 .cf-card {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(9,30,66,.13), 0 0 0 1px rgba(9,30,66,.06);
+  box-shadow: 0 1px 3px rgba(9, 30, 66, .13), 0 0 0 1px rgba(9, 30, 66, .06);
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.25rem;
 }
@@ -210,8 +438,18 @@ button {
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.cf-form-field { display: flex; flex-direction: column; gap: 4px; }
-.cf-form-actions { display: flex; gap: .5rem; margin-top: .75rem; }
+
+.cf-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cf-form-actions {
+  display: flex;
+  gap: .5rem;
+  margin-top: .75rem;
+}
 
 /* ── Stat cards ── */
 .cf-stat-grid {
@@ -220,24 +458,41 @@ button {
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
+
 .cf-stat-card {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(9,30,66,.13), 0 0 0 1px rgba(9,30,66,.06);
+  box-shadow: 0 1px 3px rgba(9, 30, 66, .13), 0 0 0 1px rgba(9, 30, 66, .06);
   padding: 1.25rem 1.5rem;
-  h3 { font-size: 12px; color: #44546f; font-weight: 600; margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .06em; }
-  .stat-value { font-size: 2.25rem; font-weight: 700; color: #172b4d; line-height: 1; }
-  .stat-label { font-size: 12px; color: #626f86; margin-top: 6px; }
+
+  h3 {
+    font-size: 12px;
+    color: #44546f;
+    font-weight: 600;
+    margin-bottom: .4rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #172b4d;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #626f86;
+    margin-top: 6px;
+  }
 }
 
 /* ── Table wrapper ── */
 .cf-table-wrap {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(9,30,66,.13), 0 0 0 1px rgba(9,30,66,.06);
+  box-shadow: 0 1px 3px rgba(9, 30, 66, .13), 0 0 0 1px rgba(9, 30, 66, .06);
   overflow: hidden;
   margin-top: 1.25rem;
 }
-=======
-/* You can add global styles to this file, and also import other style files */
->>>>>>> shazaan

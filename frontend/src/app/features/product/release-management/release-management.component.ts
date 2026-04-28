@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
-=======
->>>>>>> shazaan
 import { ChangelogEntry, Product, Release, ReleaseStatus } from '../../../core/models';
 import { ChangelogService } from '../../../core/services/changelog.service';
 import { ProductService } from '../../../core/services/product.service';
@@ -13,15 +10,12 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-release-management',
   standalone: true,
-<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-=======
-  imports: [CommonModule, ReactiveFormsModule],
->>>>>>> shazaan
   templateUrl: './release-management.component.html',
   styleUrl: './release-management.component.scss'
 })
 export class ReleaseManagementComponent implements OnInit {
+
   readonly releaseForm = this.formBuilder.nonNullable.group({
     productId: [0, Validators.required],
     version: ['', Validators.required],
@@ -40,29 +34,30 @@ export class ReleaseManagementComponent implements OnInit {
   changelogEntries: ChangelogEntry[] = [];
   statusOptions: ReleaseStatus[] = ['DRAFT', 'TESTING', 'APPROVED', 'RELEASED'];
   error = '';
-<<<<<<< HEAD
+
   showForm = false;
   selectedReleaseId: number | null = null;
-
-  statusBadge(status: ReleaseStatus): string {
-    const map: Record<ReleaseStatus, string> = {
-      DRAFT: 'badge-gray', TESTING: 'badge-yellow', APPROVED: 'badge-blue', RELEASED: 'badge-green'
-    };
-    return map[status] ?? 'badge-gray';
-  }
-=======
->>>>>>> shazaan
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly productService: ProductService,
     private readonly releaseService: ReleaseService,
     private readonly changelogService: ChangelogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadReleases();
+  }
+
+  statusBadge(status: ReleaseStatus): string {
+    const map: Record<ReleaseStatus, string> = {
+      DRAFT: 'badge-gray',
+      TESTING: 'badge-yellow',
+      APPROVED: 'badge-blue',
+      RELEASED: 'badge-green'
+    };
+    return map[status] ?? 'badge-gray';
   }
 
   loadProducts(): void {
@@ -117,11 +112,9 @@ export class ReleaseManagementComponent implements OnInit {
   }
 
   selectReleaseForChangelog(releaseId: number): void {
-<<<<<<< HEAD
     this.selectedReleaseId = releaseId;
-=======
->>>>>>> shazaan
     this.changelogForm.patchValue({ releaseId });
+
     this.changelogService.listByRelease(releaseId).subscribe({
       next: (entries) => {
         this.changelogEntries = entries;
@@ -141,7 +134,11 @@ export class ReleaseManagementComponent implements OnInit {
     this.changelogService.create(this.changelogForm.getRawValue()).subscribe({
       next: () => {
         const releaseId = this.changelogForm.getRawValue().releaseId;
-        this.changelogForm.patchValue({ title: '', entryType: 'feature', description: '' });
+        this.changelogForm.patchValue({
+          title: '',
+          entryType: 'feature',
+          description: ''
+        });
         this.selectReleaseForChangelog(releaseId);
       },
       error: (err) => {
@@ -175,5 +172,4 @@ export class ReleaseManagementComponent implements OnInit {
     };
     return map[status];
   }
-
 }

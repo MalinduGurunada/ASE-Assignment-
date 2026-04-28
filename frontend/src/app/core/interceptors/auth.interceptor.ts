@@ -1,10 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-=======
->>>>>>> shazaan
 import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -13,7 +10,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const authService = inject(AuthService);
-<<<<<<< HEAD
   const router = inject(Router);
   const token = authService.getToken();
 
@@ -27,19 +23,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         authService.clearToken();
         router.navigate(['/auth/login']);
       }
+
       return throwError(() => err);
     })
   );
-=======
-  const token = authService.getToken();
-  if (!token) {
-    return next(req);
-  }
-
-  return next(req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
-  }));
->>>>>>> shazaan
 };
