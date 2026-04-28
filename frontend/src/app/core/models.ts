@@ -1,6 +1,6 @@
 export type Role = 'ADMIN' | 'VIEWER';
 export type ReleaseStatus = 'DRAFT' | 'TESTING' | 'APPROVED' | 'RELEASED';
-export type DeploymentStatus = 'PENDING' | 'DEPLOYED' | 'FAILED' | 'ROLLED_BACK';
+export type DeploymentStatus = 'PENDING' | 'SUCCESS' | 'DEPLOYED' | 'FAILED' | 'ROLLED_BACK';
 
 export interface LoginResponse {
   accessToken: string;

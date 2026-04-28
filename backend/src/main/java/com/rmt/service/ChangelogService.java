@@ -9,6 +9,7 @@ import com.rmt.web.dto.ChangelogEntryRequest;
 import com.rmt.web.dto.ChangelogEntryResponse;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ChangelogService {
@@ -21,6 +22,7 @@ public class ChangelogService {
         this.releaseRepository = releaseRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<ChangelogEntryResponse> findByRelease(Long releaseId) {
         return changelogEntryRepository.findByReleaseIdOrderByCreatedAtDesc(releaseId).stream()
             .map(this::toResponse)

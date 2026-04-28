@@ -36,7 +36,7 @@ public class ReleaseController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN','VIEWER')")
-    public List<ReleaseResponse> list(@RequestParam(required = false) Long productId) {
+    public List<ReleaseResponse> list(@RequestParam(value = "productId", required = false) Long productId) {
         return productId == null ? releaseService.findAll() : releaseService.findByProduct(productId);
     }
 

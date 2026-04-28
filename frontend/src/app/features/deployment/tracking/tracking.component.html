@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <div class="cf-breadcrumb">
   <a routerLink="/dashboard">RMT</a>
   <span>›</span>
@@ -96,42 +96,3 @@
     </tbody>
   </table>
 </div>
-=======
-<section>
-  <h2>Deployment Tracking</h2>
-  <form class="deploy-form" [formGroup]="form" (ngSubmit)="createDeployment()">
-    <label>
-      Release
-      <select formControlName="releaseId">
-        <option [ngValue]="0">Select release</option>
-        <option *ngFor="let release of releases" [ngValue]="release.id">
-          {{ release.name }} ({{ release.version }})
-        </option>
-      </select>
-    </label>
-    <label>Environment <input type="text" formControlName="environmentName" /></label>
-    <label>
-      Status
-      <select formControlName="status">
-        <option value="PENDING">PENDING</option>
-        <option value="DEPLOYED">DEPLOYED</option>
-        <option value="FAILED">FAILED</option>
-        <option value="ROLLED_BACK">ROLLED_BACK</option>
-      </select>
-    </label>
-    <label>
-      Rollback Available
-      <input type="checkbox" formControlName="rollbackAvailable" />
-    </label>
-    <button type="submit">Create Deployment</button>
-  </form>
-
-  <p *ngIf="error" class="error">{{ error }}</p>
-
-  <ul>
-    <li *ngFor="let deployment of deployments">
-      {{ deployment.environmentName }}: {{ deployment.status }} - {{ deployment.releaseName }}
-    </li>
-  </ul>
-</section>
->>>>>>> shazaan

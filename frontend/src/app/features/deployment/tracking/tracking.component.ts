@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
-=======
->>>>>>> shazaan
 import { Deployment, DeploymentStatus, Release } from '../../../core/models';
 import { DeploymentService } from '../../../core/services/deployment.service';
 import { ReleaseService } from '../../../core/services/release.service';
@@ -12,11 +9,7 @@ import { ReleaseService } from '../../../core/services/release.service';
 @Component({
   selector: 'app-tracking',
   standalone: true,
-<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-=======
-  imports: [CommonModule, ReactiveFormsModule],
->>>>>>> shazaan
   templateUrl: './tracking.component.html',
   styleUrl: './tracking.component.scss'
 })
@@ -31,33 +24,36 @@ export class TrackingComponent implements OnInit {
   releases: Release[] = [];
   deployments: Deployment[] = [];
   error = '';
-<<<<<<< HEAD
   showForm = false;
-
-  statusBadge(status: string): string {
-    const map: Record<string, string> = {
-      PENDING: 'badge-yellow', DEPLOYED: 'badge-green', FAILED: 'badge-red', ROLLED_BACK: 'badge-purple'
-    };
-    return map[status] ?? 'badge-gray';
-  }
-=======
->>>>>>> shazaan
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly releaseService: ReleaseService,
     private readonly deploymentService: DeploymentService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadReleases();
     this.loadDeployments();
   }
 
+  statusBadge(status: string): string {
+    const map: Record<string, string> = {
+      PENDING: 'badge-yellow',
+      SUCCESS: 'badge-green',
+      DEPLOYED: 'badge-green',
+      FAILED: 'badge-red',
+      ROLLED_BACK: 'badge-purple'
+    };
+
+    return map[status] ?? 'badge-gray';
+  }
+
   loadReleases(): void {
     this.releaseService.list().subscribe({
       next: (releases) => {
         this.releases = releases;
+
         if (releases.length > 0 && this.form.value.releaseId === 0) {
           this.form.patchValue({ releaseId: releases[0].id });
         }
@@ -94,5 +90,4 @@ export class TrackingComponent implements OnInit {
       }
     });
   }
-
 }

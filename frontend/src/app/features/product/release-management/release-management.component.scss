@@ -1,13 +1,31 @@
-<<<<<<< HEAD
 .cf-page-icon {
   background: #f3f0ff;
   color: #5e4db2;
 }
 
-.header-actions { display: flex; gap: .5rem; align-items: center; }
-.td-name { font-weight: 600; }
-.td-empty { color: #626f86; font-style: italic; text-align: center; padding: 2.5rem; }
-.td-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.header-actions {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+
+.td-name {
+  font-weight: 600;
+}
+
+.td-empty {
+  color: #626f86;
+  font-style: italic;
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.td-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
 .version-tag {
   font-family: 'Menlo', 'Consolas', monospace;
@@ -29,12 +47,19 @@
   cursor: pointer;
   font-family: inherit;
   transition: background .12s;
-  &:hover { background: #f1f2f4; }
+
+  &:hover {
+    background: #f1f2f4;
+  }
 }
+
 .btn-subtle-sm-blue {
   color: #0c66e4;
   border-color: #cce0ff;
-  &:hover { background: #e9f2ff; }
+
+  &:hover {
+    background: #e9f2ff;
+  }
 }
 
 .inline-alert {
@@ -46,10 +71,20 @@
   border-radius: 4px;
   margin-bottom: 1rem;
 }
-.inline-alert-error { background: #ffeceb; color: #ae2a19; border-left: 3px solid #ca3521; }
 
-.changelog-box { margin-top: 1.5rem; }
-.changelog-form { margin-bottom: 1rem; }
+.inline-alert-error {
+  background: #ffeceb;
+  color: #ae2a19;
+  border-left: 3px solid #ca3521;
+}
+
+.changelog-box {
+  margin-top: 1.5rem;
+}
+
+.changelog-form {
+  margin-bottom: 1rem;
+}
 
 .changelog-list {
   list-style: none;
@@ -66,60 +101,18 @@
   font-size: 14px;
   padding: 10px 0;
   border-bottom: 1px solid #f1f2f4;
-  &:last-child { border-bottom: none; }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.entry-desc { color: #626f86; }
-.changelog-empty { color: #626f86; font-style: italic; padding: 8px 0; }
-=======
-.release-form {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(190px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+.entry-desc {
+  color: #626f86;
 }
 
-label {
-  display: grid;
-  gap: 0.3rem;
+.changelog-empty {
+  color: #626f86;
+  font-style: italic;
+  padding: 8px 0;
 }
-
-input,
-select {
-  padding: 0.5rem;
-  border: 1px solid #94a3b8;
-  border-radius: 8px;
-}
-
-button {
-  width: fit-content;
-  padding: 0.5rem 0.8rem;
-  background: #0f766e;
-  color: #fff;
-  border: 0;
-  border-radius: 8px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  border-bottom: 1px solid #cbd5e1;
-  text-align: left;
-  padding: 0.55rem;
-}
-
-.changelog-box {
-  margin-top: 1rem;
-  padding: 0.8rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-}
-
-.error {
-  color: #b91c1c;
-}
->>>>>>> shazaan

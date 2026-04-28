@@ -9,6 +9,7 @@ import com.rmt.web.dto.DeploymentRequest;
 import com.rmt.web.dto.DeploymentResponse;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DeploymentService {
@@ -21,10 +22,12 @@ public class DeploymentService {
         this.releaseRepository = releaseRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<DeploymentResponse> findAll() {
         return deploymentRepository.findAll().stream().map(this::toResponse).toList();
     }
 
+    @Transactional(readOnly = true)
     public List<DeploymentResponse> findByRelease(Long releaseId) {
         return deploymentRepository.findByReleaseId(releaseId).stream().map(this::toResponse).toList();
     }

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <div class="atlassian-bg">
   <div class="auth-card">
     <div class="auth-logo">
@@ -52,22 +52,3 @@
     <a routerLink="/auth/login" class="auth-link-btn">Log in</a>
   </div>
 </div>
-=======
-<section class="auth-panel">
-  <h2>Create Account</h2>
-  <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()">
-    <label>Username<input type="text" formControlName="username" /></label>
-    <label>Email<input type="email" formControlName="email" /></label>
-    <label>Password<input type="password" formControlName="password" /></label>
-    <label>Role
-      <select formControlName="role">
-        <option value="VIEWER">VIEWER</option>
-        <option value="ADMIN">ADMIN</option>
-      </select>
-    </label>
-    <button type="submit" [disabled]="loading">{{ loading ? 'Creating...' : 'Register' }}</button>
-  </form>
-  <p *ngIf="success" class="success">{{ success }}</p>
-  <p *ngIf="error" class="error">{{ error }}</p>
-</section>
->>>>>>> shazaan

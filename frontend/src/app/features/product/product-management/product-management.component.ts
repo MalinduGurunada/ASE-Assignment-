@@ -1,21 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { RouterLink } from '@angular/router';
-=======
->>>>>>> shazaan
 import { Product } from '../../../core/models';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
-<<<<<<< HEAD
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-=======
-  imports: [CommonModule, ReactiveFormsModule],
->>>>>>> shazaan
   templateUrl: './product-management.component.html',
   styleUrl: './product-management.component.scss'
 })
@@ -28,15 +21,12 @@ export class ProductManagementComponent implements OnInit {
   products: Product[] = [];
   loading = false;
   error = '';
-<<<<<<< HEAD
   showForm = false;
-=======
->>>>>>> shazaan
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -45,6 +35,7 @@ export class ProductManagementComponent implements OnInit {
   loadProducts(): void {
     this.loading = true;
     this.error = '';
+
     this.productService.list().subscribe({
       next: (products) => {
         this.products = products;
@@ -82,5 +73,4 @@ export class ProductManagementComponent implements OnInit {
       }
     });
   }
-
 }

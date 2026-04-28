@@ -28,7 +28,7 @@ public class DeploymentController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN','VIEWER')")
-    public List<DeploymentResponse> list(@RequestParam(required = false) Long releaseId) {
+    public List<DeploymentResponse> list(@RequestParam(value = "releaseId", required = false) Long releaseId) {
         return releaseId == null ? deploymentService.findAll() : deploymentService.findByRelease(releaseId);
     }
 
