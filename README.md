@@ -263,19 +263,19 @@ This project is assessed under SE3112 (Advanced Software Engineering). The two t
 
 ### Run Commands per Feature
 
-**Student 1 — Playwright Release Lifecycle (headed)**
+**Shazaan — Playwright Release Lifecycle (headed)**
 ```powershell
 cd frontend
 npx playwright test e2e/specs/release-workflow.spec.ts --headed
 ```
 
-**Student 2 — Playwright RBAC + Edge Cases (headed)**
+**Oshan— Playwright RBAC + Edge Cases (headed)**
 ```powershell
 cd frontend
 npx playwright test e2e/specs/rbac.spec.ts e2e/specs/negative-and-edge.spec.ts --headed
 ```
 
-**Student 3 — K6 Spike & Stress**
+**Hesara — K6 Spike & Stress**
 ```powershell
 # Stress
 C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/stress-releases.js
@@ -283,7 +283,7 @@ C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/stress-releases.js
 C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/spike-releases.js
 ```
 
-**Student 4 — K6 Data-Driven Payload Testing**
+**Malindu — K6 Data-Driven Payload Testing**
 ```powershell
 C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/data-driven-releases.js
 ```
