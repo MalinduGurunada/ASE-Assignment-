@@ -256,10 +256,10 @@ This project is assessed under SE3112 (Advanced Software Engineering). The two t
 
 | Student | Tool | Feature | Key Files |
 |---------|------|---------|-----------|
-| Student 1 | Playwright | **Page Object Model + End-to-End Release Lifecycle** — full browser test covering login, release creation, DRAFT → TESTING → APPROVED → RELEASED transitions, CSV export, and audit log verification via API | `frontend/e2e/specs/release-workflow.spec.ts`<br>`frontend/e2e/pages/auth.page.ts`<br>`frontend/e2e/pages/release-management.page.ts` |
-| Student 2 | Playwright | **RBAC Enforcement + Negative & Edge Case Testing** — verifies that viewer roles are blocked from privileged actions (403), and validates UI rejection of empty names, oversized input (>200 chars), and unauthenticated redirects | `frontend/e2e/specs/rbac.spec.ts`<br>`frontend/e2e/specs/negative-and-edge.spec.ts` |
-| Student 3 | K6 | **Spike & Stress Testing Configurations** — ramp-based stress profile (0 → 150 VUs) identifies the saturation point; spike profile (10 → 250 VUs in 20 s) tests burst resilience and recovery | `performance/k6/stress-releases.js`<br>`performance/k6/spike-releases.js` |
-| Student 4 | K6 | **Data-Driven Payload Testing** — uses K6 `SharedArray` to feed 10 distinct release templates (versioned, environment-tagged) to concurrent VUs; each iteration picks a unique template, posts it, then reads it back to verify server-side persistence | `performance/k6/data-driven-releases.js`<br>`performance/k6/load-releases.js` |
+| Shazaan | Playwright | **Page Object Model + End-to-End Release Lifecycle** — full browser test covering login, release creation, DRAFT → TESTING → APPROVED → RELEASED transitions, CSV export, and audit log verification via API | `frontend/e2e/specs/release-workflow.spec.ts`<br>`frontend/e2e/pages/auth.page.ts`<br>`frontend/e2e/pages/release-management.page.ts` |
+| Oshan | Playwright | **RBAC Enforcement + Negative & Edge Case Testing** — verifies that viewer roles are blocked from privileged actions (403), and validates UI rejection of empty names, oversized input (>200 chars), and unauthenticated redirects | `frontend/e2e/specs/rbac.spec.ts`<br>`frontend/e2e/specs/negative-and-edge.spec.ts` |
+| Hesara | K6 | **Spike & Stress Testing Configurations** — ramp-based stress profile (0 → 150 VUs) identifies the saturation point; spike profile (10 → 250 VUs in 20 s) tests burst resilience and recovery | `performance/k6/stress-releases.js`<br>`performance/k6/spike-releases.js` |
+| Malindu | K6 | **Data-Driven Payload Testing** — uses K6 `SharedArray` to feed 10 distinct release templates (versioned, environment-tagged) to concurrent VUs; each iteration picks a unique template, posts it, then reads it back to verify server-side persistence | `performance/k6/data-driven-releases.js`<br>`performance/k6/load-releases.js` |
 
 ### Run Commands per Feature
 
