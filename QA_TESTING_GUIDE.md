@@ -85,6 +85,7 @@ So you do not need to manually boot backend/frontend for normal demo runs.
 - `performance/k6/stress-releases.js`
 - `performance/k6/spike-releases.js`
 - `performance/k6/post-releases.js`
+- `performance/k6/data-driven-releases.js`
 
 ### K6 install
 
@@ -113,10 +114,11 @@ $env:K6_LOAD_DURATION="2m"
 ### Run K6 scripts
 
 ```powershell
-k6 run performance/k6/load-releases.js
-k6 run performance/k6/stress-releases.js
-k6 run performance/k6/spike-releases.js
-k6 run performance/k6/post-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/load-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/stress-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/spike-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/post-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/data-driven-releases.js
 ```
 
 ### What each script validates
@@ -137,6 +139,11 @@ k6 run performance/k6/post-releases.js
 4. `post-releases.js`:
 - Create releases under concurrent write load
 - Tracks success/failure rates for write operations
+
+5. `data-driven-releases.js`:
+- Uses `SharedArray` with 10 versioned release templates
+- Each VU picks a unique template, POSTs it, then GETs it back
+- Verifies server-side persistence under concurrent writes
 
 ### Metrics and checks included
 

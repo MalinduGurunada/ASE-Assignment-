@@ -27,3 +27,141 @@ main.js             | main  | 22.14 kB |
 Application bundle generation complete. [0.402 seconds]
 
 Page reload sent to client(s).
+Initial chunk files | Names             | Raw size
+main.js             | main              | 22.14 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-YUIHKCYX.js   | product-module    | 41.88 kB | 
+chunk-ZV4VXAEG.js   | deployment-module | 27.35 kB | 
+chunk-ADBUDG56.js   | dashboard-module  | 10.43 kB | 
+chunk-MKGSE655.js   | -                 |  1.35 kB | 
+chunk-WE5D2TOU.js   | -                 |  1.21 kB | 
+
+Application bundle generation complete. [0.702 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names            | Raw size
+main.js             | main             | 22.14 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-4KOHLBKO.js   | dashboard-module | 10.81 kB | 
+
+Application bundle generation complete. [0.385 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names  | Raw size
+styles.css          | styles |  8.66 kB | 
+
+Application bundle generation complete. [0.149 seconds]
+
+HMR update sent to client(s).
+Initial chunk files | Names | Raw size
+main.js             | main  | 22.86 kB | 
+
+Application bundle generation complete. [0.289 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names | Raw size
+main.js             | main  | 22.48 kB | 
+
+Application bundle generation complete. [0.216 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names       | Raw size
+main.js             | main        | 22.48 kB | 
+
+Lazy chunk files    | Names       | Raw size
+chunk-EMGBYOK2.js   | auth-module | 24.34 kB | 
+
+Application bundle generation complete. [0.297 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names       | Raw size
+main.js             | main        | 22.48 kB | 
+
+Lazy chunk files    | Names       | Raw size
+chunk-FYRCLYZK.js   | auth-module | 24.35 kB | 
+
+Application bundle generation complete. [0.160 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names            | Raw size
+main.js             | main             | 22.48 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-DPAFFGJK.js   | dashboard-module | 10.68 kB | 
+
+Application bundle generation complete. [0.579 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names          | Raw size
+main.js             | main           | 22.48 kB | 
+
+Lazy chunk files    | Names          | Raw size
+chunk-U4KAEBHE.js   | product-module | 41.67 kB | 
+
+Application bundle generation complete. [0.291 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names          | Raw size
+main.js             | main           | 22.48 kB | 
+
+Lazy chunk files    | Names          | Raw size
+chunk-4AD3CHWR.js   | product-module | 41.49 kB | 
+
+Application bundle generation complete. [0.249 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names             | Raw size
+main.js             | main              | 22.48 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-Z7VZLMZX.js   | deployment-module | 27.13 kB | 
+
+Application bundle generation complete. [0.203 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names             | Raw size
+main.js             | main              | 22.48 kB | 
+
+Lazy chunk files    | Names             | Raw size
+chunk-BXPIGX6R.js   | deployment-module | 26.93 kB | 
+
+Application bundle generation complete. [0.218 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names            | Raw size
+main.js             | main             | 22.48 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-PHC5LKCY.js   | dashboard-module | 10.64 kB | 
+
+Application bundle generation complete. [0.262 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names | Raw size
+main.js             | main  | 22.46 kB | 
+
+Application bundle generation complete. [0.207 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names            | Raw size
+main.js             | main             | 22.46 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-HUV4TWGB.js   | dashboard-module | 10.64 kB | 
+
+Application bundle generation complete. [0.394 seconds]
+
+Page reload sent to client(s).
+Initial chunk files | Names            | Raw size
+main.js             | main             | 22.46 kB | 
+
+Lazy chunk files    | Names            | Raw size
+chunk-TSO2TX3F.js   | dashboard-module | 10.78 kB | 
+
+Application bundle generation complete. [0.352 seconds]
+
+Page reload sent to client(s).
+10:45:35 AM [vite] ✨ new dependencies optimized: rxjs/operators
+10:45:35 AM [vite] ✨ optimized dependencies changed. reloading

@@ -20,6 +20,29 @@ export function loginAsAdmin() {
 }
 
 export function ensureProduct(token, payload = { name: 'k6-load-test-product', description: 'Created by k6 load test' }) {
-  const res = http.post(`${BASE_URL}/api/products`, JSON.stringify(payload), authHeaders(token));
-  return res.json('id');
+  const createRes = http.post(`${BASE_URL}/api/products`, JSON.stringify(payload), authHeaders(token));
+  if (createRes.status === 200 || createRes.status === 201) {
+    const id = createRes.json('id');
+    if (id) return id;
+  }
+  // Product may already exist (409) or creation failed — fall back to listing
+  console.warn(`ensureProduct: POST /api/products returned ${createRes.status} (${createRes.body}), trying GET fallback`);
+  const listRes = http.get(`${BASE_URL}/api/products`, authHeaders(token));
+  if (listRes.status !== 200) {
+    throw new Error(`ensureProduct: GET /api/products returned ${listRes.status} — cannot proceed`);
+  }
+  let products;
+  try {
+    products = listRes.json();
+  } catch (e) {
+    throw new Error(`ensureProduct: failed to parse product list — ${listRes.body}`);
+  }
+  const existing = products.find(p => p.name === payload.name);
+  if (existing && existing.id) return existing.id;
+  // Nothing matched — use the first product if any exist
+  if (products.length > 0) {
+    console.warn(`ensureProduct: '${payload.name}' not found, using first product id=${products[0].id}`);
+    return products[0].id;
+  }
+  throw new Error('ensureProduct: no products available and creation failed');
 }

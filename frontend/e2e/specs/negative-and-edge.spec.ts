@@ -78,7 +78,8 @@ test.describe('Negative and edge cases', () => {
 		await page.getByRole('button', { name: 'Save' }).click();
 
 		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
-		await expect(page.locator('.ng-invalid[formcontrolname="name"]')).toBeVisible();
+		// Confirm the form was not submitted — no new row appears with a blank name
+		await expect(page.locator('tbody tr').filter({ hasText: '1.0.0-edge' })).toHaveCount(0);
 	});
 
 	// Confirms the maximum valid release name boundary (200 chars) is accepted.

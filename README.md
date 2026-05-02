@@ -259,7 +259,7 @@ This project is assessed under SE3112 (Advanced Software Engineering). The two t
 | Shazaan | Playwright | **Page Object Model + End-to-End Release Lifecycle** — full browser test covering login, release creation, DRAFT → TESTING → APPROVED → RELEASED transitions, CSV export, and audit log verification via API | `frontend/e2e/specs/release-workflow.spec.ts`<br>`frontend/e2e/pages/auth.page.ts`<br>`frontend/e2e/pages/release-management.page.ts` |
 | Oshan | Playwright | **RBAC Enforcement + Negative & Edge Case Testing** — verifies that viewer roles are blocked from privileged actions (403), and validates UI rejection of empty names, oversized input (>200 chars), and unauthenticated redirects | `frontend/e2e/specs/rbac.spec.ts`<br>`frontend/e2e/specs/negative-and-edge.spec.ts` |
 | Hesara | K6 | **Spike & Stress Testing Configurations** — ramp-based stress profile (0 → 150 VUs) identifies the saturation point; spike profile (10 → 250 VUs in 20 s) tests burst resilience and recovery | `performance/k6/stress-releases.js`<br>`performance/k6/spike-releases.js` |
-| Malindu | K6 | **Data-Driven Payload Testing** — uses K6 `SharedArray` to feed 10 distinct release templates (versioned, environment-tagged) to concurrent VUs; each iteration picks a unique template, posts it, then reads it back to verify server-side persistence | `performance/k6/data-driven-releases.js`<br>`performance/k6/load-releases.js` |
+| Malindu | K6 | **Data-Driven & Write-Load Testing** — uses K6 `SharedArray` to feed 10 distinct release templates (versioned, environment-tagged) to concurrent VUs; each iteration picks a unique template, posts it, then reads it back to verify server-side persistence; `post-releases.js` stress-tests concurrent write throughput | `performance/k6/data-driven-releases.js`<br>`performance/k6/load-releases.js`<br>`performance/k6/post-releases.js` |
 
 ### Run Commands per Feature
 
@@ -278,14 +278,15 @@ npx playwright test e2e/specs/rbac.spec.ts e2e/specs/negative-and-edge.spec.ts -
 **Hesara — K6 Spike & Stress**
 ```powershell
 # Stress
-C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/stress-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/stress-releases.js
 # Spike
-C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/spike-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/spike-releases.js
 ```
 
-**Malindu — K6 Data-Driven Payload Testing**
+**Malindu — K6 Data-Driven & Write-Load Testing**
 ```powershell
-C:\Users\Dell\Desktop\RMT\tools\k6\k6.exe run performance/k6/data-driven-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/data-driven-releases.js
+.\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/post-releases.js
 ```
 
 ## QA Automation Suite
