@@ -7,21 +7,44 @@ set "PASSED=0"
 set "FAILED=0"
 
 echo ============================================================
-echo  MALINDU ^| K6 ^| Data-Driven ^& Write-Load Testing
-echo  Load         : constant 20 VUs, 3m baseline read load
-echo  Post-releases: concurrent write throughput stress
-echo  Data-driven  : SharedArray 10 templates, post + read-back
+echo  PLAYWRIGHT ^| Full Run + HTML Report
 echo ============================================================
 echo.
-echo  Requires backend running at http://localhost:8080
-echo  Start with: cd backend ^& .\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=h2
-echo.
 
-call :RunStep "load-releases.js" ".\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/load-releases.js"
-call :RunStep "post-releases.js" ".\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/post-releases.js"
-call :RunStep "data-driven-releases.js" ".\performance\k6-bin\k6-v1.7.1-windows-amd64\k6.exe run performance/k6/data-driven-releases.js"
+if not exist "frontend\package.json" (
+  echo ERROR: frontend\package.json not found.
+  echo Run this script from the project root.
+  echo.
+  echo Press any key to close this window...
+  pause >nul
+  endlocal & exit /b 1
+)
+
+cd frontend
+call :RunStep "Run Playwright tests with HTML reporter" "npx playwright test --reporter=html --workers=1"
+
+echo [2/2] Opening HTML report...
+echo.
+if exist "playwright-report\index.html" (
+  start "" "playwright-report\index.html"
+  set /a TOTAL+=1
+  set "STEP_NAME[!TOTAL!]=Open playwright-report\index.html"
+  set "STEP_CODE[!TOTAL!]=0"
+  set /a PASSED+=1
+) else (
+  set /a TOTAL+=1
+  set "STEP_NAME[!TOTAL!]=Open playwright-report\index.html"
+  set "STEP_CODE[!TOTAL!]=1"
+  set /a FAILED+=1
+  echo Report not found at frontend\playwright-report\index.html
+  echo.
+)
+cd ..
 
 call :PrintSummary
+echo.
+echo Tip: To serve report with Playwright, run:
+echo   cd frontend ^& npx playwright show-report
 echo.
 echo Press any key to close this window...
 pause >nul
@@ -33,7 +56,7 @@ endlocal & exit /b %OVERALL_EXIT%
 :RunStep
 set /a TOTAL+=1
 set "STEP_NAME=%~1"
-echo [!TOTAL!/3] Running !STEP_NAME!...
+echo [!TOTAL!/2] Running !STEP_NAME!...
 echo.
 call cmd /c "%~2"
 set "STEP_CODE=!ERRORLEVEL!"
